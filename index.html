@@ -1,0 +1,1112 @@
+<meta charset="utf-8">
+<title>YIRAH — The Fear of the LORD</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root{
+    color-scheme: dark;
+    --night:#100C0A;
+    --smoke:#1A1512;
+    --smoke2:#231B15;
+    --line:rgba(229,176,76,.16);
+    --line-soft:rgba(229,176,76,.09);
+    --ivory:#F2E9DB;
+    --ash:#B5A68F;
+    --faint:#847660;
+    --gold:#E5B04C;
+    --gold-bright:#F2CE82;
+    --ember:#DF5B28;
+    --garnet:#8E2A18;
+    --slate:#8FB4CE;
+    --slate-dim:rgba(143,180,206,.14);
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+    --sans:"Avenir Next","Helvetica Neue","Segoe UI",Helvetica,Arial,sans-serif;
+    --heb:"SBL Hebrew","Ezra SIL","Times New Roman",var(--serif);
+    --fire:linear-gradient(90deg,#6E1A0E 0%,#A93018 22%,#DF5B28 45%,#E5B04C 68%,#F2DCA0 86%,#FBF4E4 100%);
+  }
+  html{scroll-behavior:smooth}
+  html,body{background:var(--night)}
+  body{
+    color:var(--ivory);
+    font-family:var(--serif);
+    font-size:17px;
+    line-height:1.75;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{background:rgba(229,176,76,.35);color:#fff}
+  a{color:var(--gold);text-decoration:none}
+  a:hover{color:var(--gold-bright)}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:2px}
+
+  .wrap{max-width:1120px;margin-inline:auto;padding-inline:clamp(20px,5vw,48px)}
+  .reading{max-width:68ch}
+  section{padding-block:clamp(76px,12vh,150px);scroll-margin-top:76px;position:relative}
+  section + section{border-top:1px solid var(--line-soft)}
+
+  /* ---------- utility type ---------- */
+  .eyebrow{
+    font-family:var(--sans);font-size:.72rem;font-weight:600;
+    letter-spacing:.24em;text-transform:uppercase;color:var(--gold);
+    display:flex;align-items:center;gap:14px;margin-bottom:26px;
+  }
+  .eyebrow::before{content:"";display:block;width:34px;height:1px;background:var(--gold);opacity:.7}
+  .title{
+    font-family:var(--serif);font-weight:700;
+    font-size:clamp(2.1rem,4.6vw,3.5rem);line-height:1.08;
+    letter-spacing:-.015em;text-wrap:balance;margin:0 0 22px;
+  }
+  .lede{
+    font-size:clamp(1.1rem,1.9vw,1.3rem);line-height:1.65;color:var(--ash);
+    max-width:62ch;margin:0 0 14px;text-wrap:pretty;
+  }
+  .body-copy p{max-width:68ch;margin:0 0 1.25em;color:var(--ivory)}
+  .body-copy p:last-child{margin-bottom:0}
+  .body-copy em{color:var(--gold-bright);font-style:italic}
+  .hw{font-family:var(--heb);color:var(--gold-bright);font-size:1.15em;white-space:nowrap}
+  .gw{color:var(--slate);font-style:italic}
+  .ref{
+    font-family:var(--sans);font-size:.72rem;font-weight:600;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--faint);
+  }
+  .note{font-size:.92rem;color:var(--ash)}
+
+  /* ---------- nav ---------- */
+  .nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(16,12,10,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line-soft);
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-block:14px}
+  .wordmark{display:flex;align-items:baseline;gap:12px;color:var(--ivory)}
+  .wordmark .heb{font-family:var(--heb);font-size:1.35rem;color:var(--gold)}
+  .wordmark .lat{font-family:var(--sans);font-size:.74rem;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--ash);white-space:nowrap}
+  .nav-links{display:flex;gap:clamp(12px,2.4vw,28px);font-family:var(--sans);font-size:.76rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
+  .nav-links a{color:var(--ash)}
+  .nav-links a:hover{color:var(--gold-bright)}
+  @media (max-width:760px){
+    .wordmark .lat{display:none}
+    .nav-links{gap:18px}
+    .nav-links a:nth-child(1),.nav-links a:nth-child(3),.nav-links a:nth-child(5){display:none}
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    min-height:92vh;display:flex;flex-direction:column;justify-content:center;
+    position:relative;overflow:hidden;padding-block:120px 90px;border-top:none;
+  }
+  .hero-bg{
+    position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(ellipse 70% 52% at 50% 108%, rgba(223,91,40,.20), transparent 62%),
+      radial-gradient(ellipse 46% 34% at 50% 112%, rgba(229,176,76,.26), transparent 60%),
+      radial-gradient(ellipse 90% 70% at 50% -20%, rgba(20,14,10,.0), transparent);
+  }
+  .hero-inner{position:relative;text-align:center;margin-inline:auto;max-width:960px}
+  .hero-eyebrow{justify-content:center;margin-bottom:34px}
+  .hero-eyebrow::after{content:"";display:block;width:34px;height:1px;background:var(--gold);opacity:.7}
+  .hero-heb{
+    font-family:var(--heb);direction:rtl;
+    font-size:clamp(4.2rem,14vw,10.5rem);line-height:1.15;
+    margin:0 0 10px;color:var(--gold-bright);
+    text-shadow:0 0 60px rgba(229,176,76,.28),0 0 140px rgba(223,91,40,.22);
+    animation:breathe 7s ease-in-out infinite;
+  }
+  @keyframes breathe{
+    0%,100%{text-shadow:0 0 50px rgba(229,176,76,.22),0 0 130px rgba(223,91,40,.16)}
+    50%{text-shadow:0 0 80px rgba(229,176,76,.42),0 0 190px rgba(223,91,40,.34)}
+  }
+  .hero-translit{
+    font-family:var(--sans);font-size:.8rem;font-weight:600;letter-spacing:.42em;
+    text-transform:uppercase;color:var(--ash);margin-bottom:30px;
+  }
+  .hero-title{
+    font-family:var(--serif);font-weight:700;font-size:clamp(2rem,5.4vw,4rem);
+    line-height:1.1;letter-spacing:-.01em;margin:0 0 26px;text-wrap:balance;
+  }
+  .hero-thesis{
+    font-size:clamp(1.05rem,2vw,1.28rem);color:var(--ash);line-height:1.7;
+    max-width:56ch;margin:0 auto;text-wrap:pretty;
+  }
+  .hero-thesis strong{color:var(--ivory);font-weight:600}
+  .scroll-cue{
+    position:absolute;left:50%;bottom:26px;transform:translateX(-50%);
+    font-family:var(--sans);font-size:.68rem;font-weight:600;letter-spacing:.3em;
+    text-transform:uppercase;color:var(--faint);
+    display:flex;flex-direction:column;align-items:center;gap:10px;
+  }
+  .scroll-cue::after{
+    content:"";width:1px;height:44px;
+    background:linear-gradient(var(--gold),transparent);
+    animation:cue 2.6s ease-in-out infinite;transform-origin:top;
+  }
+  @keyframes cue{0%,100%{transform:scaleY(.4);opacity:.4}50%{transform:scaleY(1);opacity:1}}
+
+  /* embers */
+  .embers{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+  .embers i{
+    --x:50%;--s:5px;--d:11s;--dl:0s;--drift:20px;
+    position:absolute;left:var(--x);bottom:-12px;
+    width:var(--s);height:var(--s);border-radius:50%;
+    background:radial-gradient(circle at 35% 35%,#FBE7B8,#E5B04C 45%,#DF5B28 80%);
+    filter:blur(.4px);opacity:0;
+    animation:rise var(--d) linear infinite;animation-delay:var(--dl);
+  }
+  @keyframes rise{
+    0%{transform:translate(0,0) scale(1);opacity:0}
+    8%{opacity:.9}
+    60%{opacity:.55}
+    100%{transform:translate(var(--drift),-92vh) scale(.25);opacity:0}
+  }
+
+  /* ---------- paradox ---------- */
+  .paradox-grid{
+    display:grid;grid-template-columns:1fr auto 1fr;gap:clamp(18px,4vw,54px);
+    align-items:stretch;margin:56px 0 60px;
+  }
+  .paradox-cell{padding:clamp(22px,3.4vw,40px);border:1px solid var(--line);background:var(--smoke)}
+  .paradox-cell .heb{font-family:var(--heb);direction:rtl;font-size:clamp(1.9rem,4vw,2.9rem);color:var(--gold-bright);display:block;margin-bottom:8px}
+  .paradox-cell h3{font-family:var(--serif);font-size:clamp(1.25rem,2.2vw,1.6rem);font-weight:700;margin:0 0 12px}
+  .paradox-cell p{color:var(--ash);font-size:.98rem;margin:0}
+  .paradox-root{
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;
+  }
+  .paradox-root .letters{
+    font-family:var(--heb);font-size:clamp(2.4rem,5vw,3.6rem);color:var(--ember);
+    letter-spacing:.18em;direction:rtl;
+    animation:rootpulse 5s ease-in-out infinite;
+  }
+  @keyframes rootpulse{0%,100%{opacity:.75}50%{opacity:1;text-shadow:0 0 30px rgba(223,91,40,.5)}}
+  .paradox-root .cap{font-family:var(--sans);font-size:.68rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--faint);max-width:14ch}
+  @media (max-width:820px){
+    .paradox-grid{grid-template-columns:1fr}
+    .paradox-root{padding-block:8px}
+  }
+  .keystone{
+    border-left:2px solid var(--gold);padding:6px 0 6px clamp(20px,3vw,34px);margin:52px 0 0;
+  }
+  .keystone .heb-line{font-family:var(--heb);direction:rtl;text-align:right;font-size:clamp(1.3rem,2.6vw,1.8rem);color:var(--gold-bright);line-height:1.9;margin-bottom:10px}
+  .keystone .en-line{font-size:clamp(1.12rem,2vw,1.35rem);font-style:italic;color:var(--ivory);line-height:1.6;margin-bottom:12px;max-width:60ch}
+
+  /* ---------- lexicon ---------- */
+  .lang-head{display:flex;align-items:baseline;gap:16px;margin:64px 0 22px}
+  .lang-head h3{font-family:var(--sans);font-size:.78rem;font-weight:700;letter-spacing:.26em;text-transform:uppercase;margin:0}
+  .lang-head .rule-x{flex:1;height:1px;background:var(--line)}
+  .lang-head.hebrew h3{color:var(--gold)}
+  .lang-head.greek h3{color:var(--slate)}
+  .lex-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+  .lex-card{
+    border:1px solid var(--line);background:var(--smoke);
+    padding:26px 26px 24px;display:flex;flex-direction:column;gap:12px;
+    transition:border-color .3s,transform .3s;
+  }
+  .lex-card:hover{border-color:rgba(229,176,76,.4);transform:translateY(-3px)}
+  .lex-card.greek{border-color:var(--slate-dim)}
+  .lex-card.greek:hover{border-color:rgba(143,180,206,.45)}
+  .lex-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+  .lex-word{font-family:var(--heb);font-size:clamp(1.9rem,3vw,2.5rem);line-height:1.2;color:var(--gold-bright)}
+  .lex-card.greek .lex-word{font-family:var(--serif);color:var(--slate);font-style:italic}
+  .lex-count{
+    font-family:var(--sans);font-variant-numeric:tabular-nums;
+    font-size:.72rem;font-weight:600;letter-spacing:.08em;color:var(--ash);
+    border:1px solid var(--line);padding:4px 9px;white-space:nowrap;
+  }
+  .lex-card.greek .lex-count{border-color:var(--slate-dim)}
+  .lex-meta{font-family:var(--sans);font-size:.74rem;letter-spacing:.06em;color:var(--faint)}
+  .lex-meta b{color:var(--ash);font-weight:600}
+  .lex-gloss{font-family:var(--serif);font-size:1.16rem;font-weight:700;line-height:1.35;color:var(--ivory)}
+  .lex-range{font-size:.93rem;color:var(--ash);line-height:1.6}
+  .lex-verse{
+    margin-top:auto;border-top:1px solid var(--line-soft);padding-top:14px;
+    font-size:.95rem;font-style:italic;color:var(--ivory);line-height:1.6;
+  }
+  .lex-verse .ref{display:block;margin-top:8px;font-style:normal}
+
+  /* ---------- spectrum ---------- */
+  .spectrum-band{
+    height:14px;border-radius:7px;margin:58px 0 0;
+    background:var(--fire);background-size:200% 100%;
+    animation:firedrift 14s ease-in-out infinite alternate;
+    box-shadow:0 0 34px rgba(223,91,40,.3);
+  }
+  @keyframes firedrift{from{background-position:0% 0}to{background-position:100% 0}}
+  .spectrum-stops{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-top:0}
+  .spectrum-stop{padding-top:18px;position:relative}
+  .spectrum-stop::before{
+    content:"";position:absolute;top:0;left:12px;width:1px;height:12px;background:var(--line);
+  }
+  .spectrum-stop{padding-left:12px}
+  .spectrum-stop .sw{font-family:var(--heb);font-size:1.25rem;color:var(--gold-bright);display:block}
+  .spectrum-stop .sl{font-family:var(--sans);font-size:.7rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;display:block;margin:4px 0 6px}
+  .spectrum-stop .sd{font-size:.84rem;color:var(--ash);line-height:1.55;display:block}
+  .spectrum-stop:nth-child(1) .sl{color:#C0492B}
+  .spectrum-stop:nth-child(2) .sl{color:#D3612C}
+  .spectrum-stop:nth-child(3) .sl{color:#E07E32}
+  .spectrum-stop:nth-child(4) .sl{color:#E5A649}
+  .spectrum-stop:nth-child(5) .sl{color:#EFCB86}
+  .spectrum-stop:nth-child(6) .sl{color:#FAF0DC}
+  @media (max-width:900px){
+    .spectrum-band{display:none}
+    .spectrum-stops{grid-template-columns:1fr;gap:0;border-left:6px solid transparent;
+      border-image:linear-gradient(180deg,#6E1A0E,#A93018,#DF5B28,#E5B04C,#F2DCA0,#FBF4E4) 1;
+      margin-top:48px}
+    .spectrum-stop{padding:16px 0 16px 22px}
+    .spectrum-stop::before{display:none}
+    .spectrum-stop + .spectrum-stop{border-top:1px solid var(--line-soft)}
+  }
+
+  /* ---------- threads ---------- */
+  .threads-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:18px;margin-top:56px}
+  .thread{
+    border:1px solid var(--line);background:var(--smoke);padding:30px 28px;
+    display:flex;flex-direction:column;gap:14px;transition:border-color .3s,transform .3s;
+  }
+  .thread:hover{border-color:rgba(229,176,76,.4);transform:translateY(-3px)}
+  .thread .icon{width:40px;height:40px;color:var(--gold)}
+  .thread h3{font-family:var(--serif);font-size:1.4rem;font-weight:700;line-height:1.25;margin:0;text-wrap:balance}
+  .thread p{font-size:.96rem;color:var(--ash);line-height:1.7;margin:0}
+  .thread p b{color:var(--ivory);font-weight:600}
+  .thread .refs{font-family:var(--sans);font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-top:auto;padding-top:10px;border-top:1px solid var(--line-soft);line-height:2}
+
+  /* ---------- texts wall ---------- */
+  .texts-wall{columns:3;column-gap:18px;margin-top:56px}
+  @media (max-width:1000px){.texts-wall{columns:2}}
+  @media (max-width:640px){.texts-wall{columns:1}}
+  .text-card{
+    break-inside:avoid;border:1px solid var(--line);background:var(--smoke);
+    padding:24px 24px 20px;margin-bottom:18px;
+  }
+  .text-card blockquote{margin:0 0 14px;font-style:italic;font-size:1.02rem;line-height:1.65;color:var(--ivory)}
+  .text-card blockquote b{font-style:normal;color:var(--gold-bright);font-weight:600}
+  .text-card .chip{
+    display:inline-block;font-family:var(--sans);font-size:.72rem;font-weight:600;
+    letter-spacing:.05em;color:var(--gold);border:1px solid var(--line);
+    padding:3px 9px;margin-bottom:10px;
+  }
+  .text-card .chip .hw{font-size:1em}
+  .text-card .ref{display:block}
+
+  /* ---------- voices ---------- */
+  .voices-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px;margin-top:56px}
+  .voice{
+    border:1px solid var(--line);background:var(--smoke);padding:30px 28px;
+    display:flex;flex-direction:column;gap:16px;
+  }
+  .voice .icon{width:40px;height:40px;color:var(--gold)}
+  .voice h3{font-family:var(--serif);font-size:1.5rem;font-weight:700;margin:0}
+  .voice .vtag{font-family:var(--sans);font-size:.68rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
+  .voice ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+  .voice li{font-size:.94rem;color:var(--ash);line-height:1.65;padding-left:18px;position:relative}
+  .voice li::before{content:"";position:absolute;left:0;top:.62em;width:7px;height:1px;background:var(--gold)}
+  .voice li b{color:var(--ivory);font-weight:600}
+  .voice .pull{
+    margin-top:auto;border-top:1px solid var(--line-soft);padding-top:16px;
+    font-style:italic;font-size:1.02rem;color:var(--gold-bright);line-height:1.6;
+  }
+  .voice .pull .who{display:block;font-family:var(--sans);font-style:normal;font-size:.7rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin-top:8px}
+
+  /* ---------- arc ---------- */
+  .arc{position:relative;margin-top:64px;padding-left:clamp(28px,5vw,54px)}
+  .arc::before{
+    content:"";position:absolute;left:8px;top:6px;bottom:6px;width:2px;
+    background:linear-gradient(180deg,#5B1A0F,#A93018 30%,#DF5B28 55%,#E5B04C 80%,#F5E3B8);
+    border-radius:2px;
+  }
+  .arc-pulse{
+    position:absolute;left:3px;top:0;width:12px;height:12px;border-radius:50%;
+    background:radial-gradient(circle,#FBE7B8,#E5B04C 60%,transparent 75%);
+    box-shadow:0 0 18px 4px rgba(229,176,76,.55);
+    animation:travel 9s ease-in-out infinite;
+  }
+  @keyframes travel{0%{top:0;opacity:0}6%{opacity:1}94%{opacity:1}100%{top:calc(100% - 12px);opacity:0}}
+  .arc-item{position:relative;padding:0 0 44px}
+  .arc-item:last-child{padding-bottom:0}
+  .arc-item::before{
+    content:"";position:absolute;left:calc(-1*clamp(28px,5vw,54px) + 3px);top:9px;
+    width:12px;height:12px;border-radius:50%;background:var(--night);
+    border:2px solid var(--gold);
+  }
+  .arc-item .stage{font-family:var(--sans);font-size:.7rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:6px}
+  .arc-item h3{font-family:var(--serif);font-size:1.35rem;font-weight:700;margin:0 0 8px}
+  .arc-item p{font-size:.97rem;color:var(--ash);max-width:62ch;margin:0;line-height:1.7}
+  .arc-item p b{color:var(--ivory);font-weight:600}
+
+  /* ---------- coda ---------- */
+  .coda{text-align:center;overflow:hidden}
+  .trisagion{position:relative;width:min(340px,74vw);margin:0 auto 54px;aspect-ratio:1}
+  .trisagion svg{width:100%;height:100%;display:block;animation:spin 60s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .trisagion .center{
+    position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+  }
+  .trisagion .center .heb{font-family:var(--heb);font-size:clamp(1.5rem,4vw,2.1rem);color:var(--gold-bright);direction:rtl;line-height:1.5}
+  .trisagion .center .sub{font-family:var(--sans);font-size:.66rem;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--faint)}
+  .coda-verse{
+    font-family:var(--heb);direction:rtl;font-size:clamp(1.35rem,3vw,2rem);
+    color:var(--gold-bright);line-height:2;max-width:34ch;margin:0 auto 18px;
+  }
+  .coda-en{font-size:clamp(1.15rem,2.2vw,1.5rem);font-style:italic;color:var(--ivory);max-width:46ch;margin:0 auto 10px;line-height:1.6}
+  .coda-close{max-width:58ch;margin:44px auto 0;color:var(--ash);text-wrap:pretty}
+  .coda-close strong{color:var(--ivory)}
+
+  /* ---------- footer ---------- */
+  footer{border-top:1px solid var(--line-soft);padding:56px 0 72px}
+  .foot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:34px}
+  footer h4{font-family:var(--sans);font-size:.7rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin:0 0 12px}
+  footer p{font-size:.86rem;color:var(--faint);line-height:1.7;margin:0}
+
+  /* ---------- reveal ---------- */
+  .js .rv{opacity:0;transform:translateY(26px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.65,.25,1)}
+  .js .rv.in{opacity:1;transform:none}
+
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .hero-heb,.embers i,.scroll-cue::after,.paradox-root .letters,
+    .spectrum-band,.arc-pulse,.trisagion svg{animation:none}
+    .embers,.arc-pulse{display:none}
+    .js .rv{opacity:1;transform:none;transition:none}
+  }
+</style>
+
+<nav class="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="wordmark"><span class="heb">יִרְאָה</span><span class="lat">Yirah · a study</span></a>
+    <div class="nav-links">
+      <a href="#paradox">Paradox</a>
+      <a href="#lexicon">Lexicon</a>
+      <a href="#spectrum">Spectrum</a>
+      <a href="#threads">Threads</a>
+      <a href="#voices">Voices</a>
+      <a href="#arc">Arc</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ================= HERO ================= -->
+<header class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="embers" aria-hidden="true">
+    <i style="--x:8%;--s:4px;--d:12s;--dl:0s;--drift:34px"></i>
+    <i style="--x:16%;--s:6px;--d:15s;--dl:3.2s;--drift:-26px"></i>
+    <i style="--x:24%;--s:3px;--d:10s;--dl:6s;--drift:18px"></i>
+    <i style="--x:33%;--s:5px;--d:13s;--dl:1.4s;--drift:-38px"></i>
+    <i style="--x:41%;--s:4px;--d:16s;--dl:7.5s;--drift:24px"></i>
+    <i style="--x:49%;--s:7px;--d:11s;--dl:4.1s;--drift:-16px"></i>
+    <i style="--x:57%;--s:3px;--d:14s;--dl:9s;--drift:30px"></i>
+    <i style="--x:65%;--s:5px;--d:12.5s;--dl:2.2s;--drift:-32px"></i>
+    <i style="--x:73%;--s:4px;--d:15.5s;--dl:5.6s;--drift:20px"></i>
+    <i style="--x:81%;--s:6px;--d:10.5s;--dl:8.3s;--drift:-22px"></i>
+    <i style="--x:89%;--s:3px;--d:13.5s;--dl:0.8s;--drift:36px"></i>
+    <i style="--x:95%;--s:5px;--d:16.5s;--dl:6.7s;--drift:-28px"></i>
+  </div>
+  <div class="wrap hero-inner">
+    <p class="eyebrow hero-eyebrow">Hebrew · Greek · Theology · A Deep Dive</p>
+    <h1 class="hero-heb" lang="he">יִרְאַת יְהוָה</h1>
+    <p class="hero-translit">yirʾat YHWH</p>
+    <p class="hero-title">The Fear of the LORD</p>
+    <p class="hero-thesis">
+      The Bible calls it <strong>the beginning of wisdom</strong>, a <strong>fountain of life</strong>,
+      a <strong>treasure</strong>, and the <strong>whole duty of humanity</strong> — yet its own most
+      repeated reassurance is <strong>“fear not.”</strong> This is a study of that paradox: the words
+      beneath it, the threads that run through it, and the traditions that have carried it.
+    </p>
+  </div>
+  <p class="scroll-cue">Descend</p>
+</header>
+
+<!-- ================= PARADOX ================= -->
+<section id="paradox">
+  <div class="wrap">
+    <p class="eyebrow rv">The Paradox</p>
+    <h2 class="title rv">“Fear not” and “Fear him”<br>are the same verb.</h2>
+    <p class="lede rv">
+      Scripture forbids fear more often than it forbids anything else — and yet commands the fear
+      of God as its foundation. Both commands are built on the identical Hebrew root. The Bible is
+      not contradicting itself; it is drawing a distinction our word “fear” has flattened.
+    </p>
+
+    <div class="paradox-grid">
+      <div class="paradox-cell rv">
+        <span class="heb" lang="he">אַל־תִּירָא</span>
+        <h3>ʾal-tiraʾ — “Fear not”</h3>
+        <p>Spoken to Abram, Hagar, Moses, Joshua, Mary, the shepherds, the women at the tomb.
+        Counted variously, some form of “do not fear / do not be afraid” appears well over a
+        hundred times — the most repeated reassurance in Scripture. It is almost always said by
+        God, or by someone standing where God has just appeared.</p>
+      </div>
+      <div class="paradox-root rv" aria-hidden="true">
+        <span class="letters" lang="he">י ר א</span>
+        <span class="cap">One root — yod · resh · alef</span>
+      </div>
+      <div class="paradox-cell rv">
+        <span class="heb" lang="he">אֶת־הָאֱלֹהִים יְרָא</span>
+        <h3>et-haʾElohim yeraʾ — “Fear God”</h3>
+        <p>Ecclesiastes’ last word, Wisdom’s first principle, the Torah’s summary requirement
+        (Deut 10:12), and the eternal gospel of Revelation 14:7. In Luke 12, Jesus commands this
+        fear and forbids the other within four breaths: <em>“Fear him… Fear not, little flock.”</em></p>
+      </div>
+    </div>
+
+    <div class="body-copy rv">
+      <p>
+        The first fear in the Bible is not reverence. It is Adam in the trees:
+        <span class="hw" lang="he">וָאִירָא… וָאֵחָבֵא</span> — <em>“I was afraid… and I hid myself”</em>
+        (Gen 3:10). From that verse forward, Scripture knows two fears built on one root: a fear that
+        <em>flees</em> the Voice, and a fear that <em>draws near</em> to it. The whole biblical story of
+        fear is the conversion of the first into the second.
+      </p>
+      <p>
+        Nowhere is the paradox tighter than at Sinai. The mountain burns, the people stand far off,
+        and Moses says — in a single sentence, using the same verb twice:
+      </p>
+    </div>
+
+    <figure class="keystone rv">
+      <p class="heb-line" lang="he">אַל־תִּירָאוּ כִּי לְבַעֲבוּר נַסּוֹת אֶתְכֶם בָּא הָאֱלֹהִים וּבַעֲבוּר תִּהְיֶה יִרְאָתוֹ עַל־פְּנֵיכֶם</p>
+      <p class="en-line">“Do not fear — for God has come to test you, that the fear of him may be before you, so that you do not sin.”</p>
+      <figcaption class="ref">Exodus 20:20 · Then v. 21: the people stood far off, “but Moses drew near to the thick darkness where God was.”</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ================= LEXICON ================= -->
+<section id="lexicon">
+  <div class="wrap">
+    <p class="eyebrow rv">The Lexicon</p>
+    <h2 class="title rv">Nine words English<br>translates as one.</h2>
+    <p class="lede rv">
+      “Fear” in an English Bible is a funnel. Behind it, Hebrew distinguishes trembling from dread
+      from reverence, and Greek distinguishes terror from careful devotion. Gold marks the Hebrew
+      Bible; slate marks the Greek New Testament.
+    </p>
+
+    <div class="lang-head hebrew rv"><h3>Hebrew — the Tanakh</h3><div class="rule-x"></div></div>
+    <div class="lex-grid">
+
+      <article class="lex-card rv">
+        <div class="lex-top"><span class="lex-word" lang="he">יִרְאָה</span><span class="lex-count">45× · noun</span></div>
+        <p class="lex-meta"><b>yirʾah</b> · yir-AH · from the root י־ר־א</p>
+        <p class="lex-gloss">Fear, awe, reverence — the covenant word</p>
+        <p class="lex-range">The Bible’s central fear-word. In construct with the divine name —
+        <span class="hw" lang="he">יִרְאַת יְהוָה</span>, “the fear of the LORD” — it names not an emotion but a
+        settled orientation of life. The phrase appears 14 times in Proverbs alone, where it is the
+        engine of the entire book.</p>
+        <blockquote class="lex-verse">“The fear of the LORD is the beginning of knowledge.”
+        <span class="ref">Proverbs 1:7</span></blockquote>
+      </article>
+
+      <article class="lex-card rv">
+        <div class="lex-top"><span class="lex-word" lang="he">יָרֵא</span><span class="lex-count">300+× · verb</span></div>
+        <p class="lex-meta"><b>yareʾ</b> · yah-RAY · with participle <b>noraʾ</b>, “awesome”</p>
+        <p class="lex-gloss">To fear, to revere — and, of God, to be awesome</p>
+        <p class="lex-range">The workhorse verb, spanning ordinary fright to worship. Its passive
+        participle <span class="hw" lang="he">נוֹרָא</span> (noraʾ) became an attribute of God himself — “fearsome,
+        awesome.” Jacob wakes at Bethel, afraid, and says: <span class="hw" lang="he">מַה־נּוֹרָא הַמָּקוֹם הַזֶּה</span> —
+        “How awesome is this place!”</p>
+        <blockquote class="lex-verse">“Now I know that you are a fearer of God (yereʾ ʾElohim).”
+        <span class="ref">Genesis 22:12 · also Genesis 28:17</span></blockquote>
+      </article>
+
+      <article class="lex-card rv">
+        <div class="lex-top"><span class="lex-word" lang="he">פַּחַד</span><span class="lex-count">49× · noun</span></div>
+        <p class="lex-meta"><b>paḥad</b> · PAH-khad</p>
+        <p class="lex-gloss">Dread, trembling terror — even a name of God</p>
+        <p class="lex-range">The word for fear that seizes the body. Startlingly, it becomes a divine
+        title: Jacob swears by <span class="hw" lang="he">פַּחַד יִצְחָק</span> — “the Dread of Isaac” (Gen 31:42, 53).
+        And Hosea can aim even this word at grace: Israel will come <em>trembling</em> to the LORD
+        <em>and to his goodness</em>.</p>
+        <blockquote class="lex-verse">“They shall come in dread to the LORD and to his goodness in the latter days.”
+        <span class="ref">Hosea 3:5</span></blockquote>
+      </article>
+
+      <article class="lex-card rv">
+        <div class="lex-top"><span class="lex-word" lang="he">אֵימָה</span><span class="lex-count">17× · noun</span></div>
+        <p class="lex-meta"><b>ʾemah</b> · ay-MAH</p>
+        <p class="lex-gloss">Terror, overwhelming dread</p>
+        <p class="lex-range">The dread that falls on nations at the Exodus (Exod 15:16) and the
+        “dread and great darkness” that falls on Abram as the covenant is cut (Gen 15:12). ʾEmah is
+        fear as an atmosphere — something that descends from outside you.</p>
+        <blockquote class="lex-verse">“Terror and dread fall upon them; by the greatness of your arm they are still as a stone.”
+        <span class="ref">Exodus 15:16</span></blockquote>
+      </article>
+
+      <article class="lex-card rv">
+        <div class="lex-top"><span class="lex-word" lang="he">חָרַד</span><span class="lex-count">~39× · verb</span></div>
+        <p class="lex-meta"><b>ḥarad</b> · khah-RAD · adjective <b>ḥared</b>, “trembling”</p>
+        <p class="lex-gloss">To tremble, to quake — the honored shiver</p>
+        <p class="lex-range">Sinai itself trembles with this word (Exod 19:18). Yet in Isaiah it names
+        the person God most esteems: the one who <em>trembles at his word</em>. Ezra’s reformers are
+        literally called “the tremblers” (ḥaredim, Ezra 10:3) — a name still worn in Judaism today.</p>
+        <blockquote class="lex-verse">“This is the one to whom I will look: he who is humble and contrite in spirit and trembles at my word.”
+        <span class="ref">Isaiah 66:2</span></blockquote>
+      </article>
+
+    </div>
+
+    <div class="lang-head greek rv"><h3>Greek — Septuagint &amp; New Testament</h3><div class="rule-x"></div></div>
+    <div class="lex-grid">
+
+      <article class="lex-card greek rv">
+        <div class="lex-top"><span class="lex-word" lang="el">φόβος</span><span class="lex-count">47× noun · 95× verb</span></div>
+        <p class="lex-meta"><b>phobos / phobeomai</b> · FOH-bos</p>
+        <p class="lex-gloss">Fear — the full spectrum in one word</p>
+        <p class="lex-range">The Septuagint’s standard rendering of yirʾah, carrying the whole Hebrew
+        range into the New Testament: panic in a storm, awe at a healing, and “the fear of the Lord”
+        in which the church walks (Acts 9:31). Paul’s “fear and trembling” (phobos kai tromos) is
+        devotion, not panic — it accompanies working out salvation <em>because God works in you</em>.</p>
+        <blockquote class="lex-verse">“Work out your own salvation with fear and trembling, for it is God who works in you.”
+        <span class="ref">Philippians 2:12–13</span></blockquote>
+      </article>
+
+      <article class="lex-card greek rv">
+        <div class="lex-top"><span class="lex-word" lang="el">εὐλάβεια</span><span class="lex-count">2× · with cognates 7×</span></div>
+        <p class="lex-meta"><b>eulabeia</b> · yoo-LAH-bay-ah · lit. “taking hold well”</p>
+        <p class="lex-gloss">Reverent care, godly caution — the fear Christ himself had</p>
+        <p class="lex-range">The New Testament’s most refined fear-word: careful, devout reverence.
+        Hebrews uses it of Noah building the ark “moved with godly fear,” of right worship — and,
+        astonishingly, of Jesus in Gethsemane, who “was heard because of his eulabeia” (Heb 5:7).
+        Godly fear is not what Christ saves us from; it is something he carried.</p>
+        <blockquote class="lex-verse">“Let us offer to God acceptable worship, with reverence and awe.”
+        <span class="ref">Hebrews 12:28</span></blockquote>
+      </article>
+
+      <article class="lex-card greek rv">
+        <div class="lex-top"><span class="lex-word" lang="el">δέος</span><span class="lex-count">1× — Heb 12:28 only</span></div>
+        <p class="lex-meta"><b>deos</b> · DEH-os</p>
+        <p class="lex-gloss">Awe — used once, and placed next to fire</p>
+        <p class="lex-range">A rare, elevated word for numinous awe, appearing exactly once in the
+        New Testament — paired with eulabeia and immediately grounded in the Old Testament’s most
+        fearsome image: “for our God is a consuming fire” (Heb 12:29, quoting Deut 4:24). The writer
+        insists that the God of the new covenant has lost none of his fire.</p>
+        <blockquote class="lex-verse">“…with reverence and awe (deos), for our God is a consuming fire.”
+        <span class="ref">Hebrews 12:28–29</span></blockquote>
+      </article>
+
+      <article class="lex-card greek rv">
+        <div class="lex-top"><span class="lex-word" lang="el">σέβομαι</span><span class="lex-count">10× · verb</span></div>
+        <p class="lex-meta"><b>sebomai</b> · SEH-boh-my · cf. <b>theosebēs</b>, “God-revering”</p>
+        <p class="lex-gloss">To revere, to worship — and a name for a people</p>
+        <p class="lex-range">In Acts, “those who fear God” (phoboumenoi / sebomenoi ton theon) is a
+        technical term: Gentiles who revered Israel’s God at the synagogue’s edge — Cornelius chief
+        among them. The Psalms already knew this third assembly: “you who fear the LORD, bless the
+        LORD!” (Ps 115:11). Fear of God was the ancient door by which the nations came in.</p>
+        <blockquote class="lex-verse">“Cornelius… a devout man who feared God with all his household.”
+        <span class="ref">Acts 10:2 · Acts 13:16, 26</span></blockquote>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= SPECTRUM ================= -->
+<section id="spectrum">
+  <div class="wrap">
+    <p class="eyebrow rv">The Spectrum</p>
+    <h2 class="title rv">One band of flame,<br>from terror to delight.</h2>
+    <p class="lede rv">
+      Biblical fear is not a point; it is a range. The same vocabulary slides along it, and the
+      same encounter can occupy several stops at once. Translation must choose one English word —
+      the Hebrew never had to. Wisdom literature deliberately parks “the fear of the LORD” at the
+      bright end of the band.
+    </p>
+
+    <div class="rv">
+      <div class="spectrum-band" role="presentation"></div>
+      <div class="spectrum-stops">
+        <div class="spectrum-stop">
+          <span class="sw" lang="he">פַּחַד</span>
+          <span class="sl">Terror</span>
+          <span class="sd">Dread that seizes the body. “The Dread of Isaac” — Gen 31:42.</span>
+        </div>
+        <div class="spectrum-stop">
+          <span class="sw" lang="he">אֵימָה</span>
+          <span class="sl">Dread</span>
+          <span class="sd">Fear as descending atmosphere. Gen 15:12; Exod 15:16.</span>
+        </div>
+        <div class="spectrum-stop">
+          <span class="sw" lang="he">חֲרָדָה</span>
+          <span class="sl">Trembling</span>
+          <span class="sd">The quake of mountain and heart. Isa 66:2 — the honored shiver.</span>
+        </div>
+        <div class="spectrum-stop">
+          <span class="sw" lang="he">נוֹרָא</span>
+          <span class="sl">Awe</span>
+          <span class="sd">“How awesome is this place” — fear naming God’s nearness. Gen 28:17.</span>
+        </div>
+        <div class="spectrum-stop">
+          <span class="sw" lang="he">יִרְאָה</span>
+          <span class="sl">Reverence</span>
+          <span class="sd">A settled orientation of life — wisdom’s beginning. Prov 9:10.</span>
+        </div>
+        <div class="spectrum-stop">
+          <span class="sw" lang="he">הֲרִיחוֹ</span>
+          <span class="sl">Delight</span>
+          <span class="sd">The Messiah’s “delight” — literally his <em>breathing-in</em> — is the fear of the LORD. Isa 11:3.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="body-copy rv" style="margin-top:56px">
+      <p>
+        Read left to right, the band tells the Bible’s own story. Fear begins where sinners meet
+        holiness — Isaiah’s <em>“Woe is me”</em> (Isa 6:5), Peter’s <em>“Depart from me”</em> (Luke 5:8),
+        John falling <em>“as though dead”</em> (Rev 1:17). But in each scene the fire does not consume;
+        a coal touches the lips, a call is issued, a hand is laid on: <em>“Fear not.”</em> The terror is
+        not deleted — it is <em>transfigured</em>, moved along the band until what remains is the awe
+        without which love of God would be mere fondness.
+      </p>
+      <p>
+        Rudolf Otto called this double movement the <em>mysterium tremendum et fascinans</em> — the
+        mystery that makes us tremble and draws us in at once. The Hebrew Bible had said it earlier
+        and shorter: <em>“Serve the LORD with fear, and rejoice with trembling”</em> (Ps 2:11).
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= THREADS ================= -->
+<section id="threads">
+  <div class="wrap">
+    <p class="eyebrow rv">Deeper Threads</p>
+    <h2 class="title rv">Six threads that run<br>beneath the surface.</h2>
+    <p class="lede rv">
+      Follow the vocabulary through the canon and patterns emerge that no single verse states —
+      wordplays, reversals, and promises that braid the fear of God into the Bible’s largest ideas.
+    </p>
+
+    <div class="threads-grid">
+
+      <article class="thread rv">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M2 12s3.8-6.5 10-6.5S22 12 22 12s-3.8 6.5-10 6.5S2 12 2 12Z"/><circle cx="12" cy="12" r="2.6"/>
+        </svg>
+        <h3>To fear is to see</h3>
+        <p>In Hebrew, <b>fear</b> (yareʾ, <span class="hw" lang="he">ירא</span>) and <b>see</b> (raʾah, <span class="hw" lang="he">ראה</span>)
+        are near-twins, and Genesis 22 plays them against each other relentlessly: God will
+        <em>see to</em> the lamb (yirʾeh, v. 8); “now I know you <em>fear</em> God” (yereʾ, v. 12);
+        Abraham names the place “YHWH <em>sees</em>” (v. 14) — on the mount where the LORD
+        <em>is seen</em>. The pun is theology: those who truly see God fear him, and those who fear
+        him begin to see. Every theophany follows the pattern — sight, then dread, then “fear not.”</p>
+        <p class="refs">Genesis 22:8–14 · Genesis 28:17 · Isaiah 6:1–8 · Revelation 1:17</p>
+      </article>
+
+      <article class="thread rv">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 3c1.8 2.4 2.6 4 .9 6.1C15.5 8.6 16 7.5 16.3 6c1.5 2 2.2 4.3 1.2 6.7-1 2.5-3.1 3.8-5.5 3.8s-4.6-1.3-5.5-3.8C5.4 10.3 6.4 8 8 6.2c.2 1.3.7 2.3 2 3C8.4 6.9 10.2 5 12 3Z"/><path d="M8.5 20.5h7"/>
+        </svg>
+        <h3>The beginning that is never left behind</h3>
+        <p>Proverbs calls the fear of the LORD the <b>reshit</b> (<span class="hw" lang="he">רֵאשִׁית</span>) of
+        knowledge — the same word that opens Genesis. Reshit is not a stage you outgrow but a
+        cornerstone, a first principle, even “the chief part.” Job’s whirlwind speech, Psalm 111,
+        and Proverbs 9:10 all converge: wisdom is not information mastered but a Person rightly
+        feared. Remove the fear and knowledge doesn’t mature — it disintegrates into mere data.</p>
+        <p class="refs">Proverbs 1:7 · 9:10 · Psalm 111:10 · Job 28:28 · Ecclesiastes 12:13</p>
+      </article>
+
+      <article class="thread rv">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 21s-7-4.4-9.2-9A5.2 5.2 0 0 1 12 7.6 5.2 5.2 0 0 1 21.2 12C19 16.6 12 21 12 21Z"/><path d="M12 7.6V4.5M9.5 5.5 12 3l2.5 2.5"/>
+        </svg>
+        <h3>Forgiveness creates fear</h3>
+        <p>Intuition says punishment produces fear and pardon dissolves it. Psalm 130 says the
+        opposite: <b>“With you there is forgiveness — <em>that you may be feared</em>.”</b> Solomon prays
+        the same logic at the temple: forgive, “so that they may fear you.” Grace does not lower
+        God in our eyes; it staggers us. The person most likely to stand in awe of God is not the
+        one dreading judgment but the one who has just been inexplicably released from it.</p>
+        <p class="refs">Psalm 130:4 · 1 Kings 8:39–40 · Hosea 3:5 · Romans 2:4</p>
+      </article>
+
+      <article class="thread rv">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 3 4.5 6v5.2c0 4.6 3.1 7.6 7.5 9.8 4.4-2.2 7.5-5.2 7.5-9.8V6L12 3Z"/><path d="M12 8.2v4.6"/><circle cx="12" cy="15.6" r=".4"/>
+        </svg>
+        <h3>One fear swallows every other</h3>
+        <p>The fear of God is presented not as one anxiety added to the rest, but as the fear that
+        <b>displaces</b> them. Isaiah, facing an invasion panic: “Do not fear what they fear…
+        <em>the LORD of hosts — let him be your fear, let him be your dread</em>.” Jesus sharpens it:
+        do not fear those who kill the body; fear him — <em>therefore</em> do not be afraid, you are
+        worth more than sparrows. The midwives of Exodus feared God, and so stopped fearing
+        Pharaoh. A soul that fears God has exactly one fear left — and finds it feels like courage.</p>
+        <p class="refs">Isaiah 8:12–13 · Matthew 10:28–31 · Exodus 1:17 · Psalm 27:1 · Proverbs 14:26</p>
+      </article>
+
+      <article class="thread rv">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.6M12 18.9v2.6M2.5 12h2.6M18.9 12h2.6M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M18.7 5.3l-1.8 1.8M7.1 16.9l-1.8 1.8"/>
+        </svg>
+        <h3>Trembling and joy hold hands</h3>
+        <p>Psalm 2 issues an impossible-sounding command — <b>“rejoice with trembling”</b> — and the
+        New Testament narrates it. The women leave the empty tomb “with fear <em>and great joy</em>”
+        (meta phobou kai charas megalēs). The early church walks “in the fear of the Lord <em>and</em>
+        in the comfort of the Holy Spirit” — and multiplies. In Scripture these are not opposite
+        temperatures but one climate: joy without trembling curdles into casualness; trembling
+        without joy hardens into servility. Together they are called worship.</p>
+        <p class="refs">Psalm 2:11 · Matthew 28:8 · Acts 9:31 · Psalm 147:11 · Nehemiah 8:10–12</p>
+      </article>
+
+      <article class="thread rv">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 20h16"/><path d="M7 20V15"/><path d="M7 15c0-4.5 2-7.5 5-9.5"/><path d="M12 5.5c2 .8 3 2.3 3.2 4.2M12 5.5c-.5 1.8.2 3.3 1.8 4.4M12 11.5c1.5-.4 3.4.1 4.4 1.6"/>
+        </svg>
+        <h3>The fear that is promised, not demanded</h3>
+        <p>The prophets’ boldest move: fear of God becomes <b>gift</b>, not requirement. The Branch
+        of Jesse carries “the Spirit of the fear of the LORD,” and — the Hebrew is startling — his
+        very <em>breath</em> delights in it (Isa 11:3). Jeremiah’s new covenant goes further: “I will
+        put the fear of me <em>in their hearts</em>, so that they will not turn from me.” What Sinai
+        commanded from outside, the Spirit implants from within. The fear of the LORD ends the
+        Bible not as a threat but as the atmosphere of the healed world: “Who will not fear you?”</p>
+        <p class="refs">Isaiah 11:1–3 · Jeremiah 32:39–40 · Hebrews 5:7 · Revelation 15:4</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= TEXTS ================= -->
+<section id="texts">
+  <div class="wrap">
+    <p class="eyebrow rv">The Witness</p>
+    <h2 class="title rv">A gallery of texts,<br>annotated.</h2>
+    <p class="lede rv">
+      Ten passages that carry the theme’s weight — each with the original word that English
+      translation smooths over.
+    </p>
+
+    <div class="texts-wall">
+
+      <article class="text-card rv">
+        <span class="chip"><span class="hw" lang="he">לְיִרְאָה</span> · to fear</span>
+        <blockquote>“What does the LORD your God require of you, but <b>to fear</b> the LORD your God, to walk in all his ways, <b>to love him</b>, to serve… and to keep his commandments.”</blockquote>
+        <span class="ref">Deuteronomy 10:12–13 — fear and love in one requirement, not two.</span>
+      </article>
+
+      <article class="text-card rv">
+        <span class="chip"><span class="hw" lang="he">טְהוֹרָה</span> · ṭehorah, clean</span>
+        <blockquote>“The fear of the LORD is <b>clean</b>, enduring forever.”</blockquote>
+        <span class="ref">Psalm 19:9 — the one fear with no contamination in it, and no expiry.</span>
+      </article>
+
+      <article class="text-card rv">
+        <span class="chip"><span class="hw" lang="he">סוֹד</span> · sod, secret counsel</span>
+        <blockquote>“The <b>secret counsel</b> of the LORD is for those who fear him, and he makes known to them his covenant.”</blockquote>
+        <span class="ref">Psalm 25:14 — fear as the doorway to intimacy, not distance. Sod is the word for a circle of confidants.</span>
+      </article>
+
+      <article class="text-card rv">
+        <span class="chip"><span class="hw" lang="he">יַחֵד לְבָבִי</span> · unite my heart</span>
+        <blockquote>“Teach me your way, O LORD… <b>unite my heart</b> to fear your name.”</blockquote>
+        <span class="ref">Psalm 86:11 — fear of God as the cure for a divided, scattered self.</span>
+      </article>
+
+      <article class="text-card rv">
+        <span class="chip"><span class="hw" lang="he">שְׂנֹאת רָע</span> · hatred of evil</span>
+        <blockquote>“The fear of the LORD is <b>hatred of evil</b>.”</blockquote>
+        <span class="ref">Proverbs 8:13 — its ethical definition: not anxiety toward God but hostility toward what destroys.</span>
+      </article>
+
+      <article class="text-card rv">
+        <span class="chip"><span class="hw" lang="he">מִבְטָח / מְקוֹר</span> · refuge / fountain</span>
+        <blockquote>“In the fear of the LORD one has <b>strong confidence</b>… The fear of the LORD is a <b>fountain of life</b>.”</blockquote>
+        <span class="ref">Proverbs 14:26–27 — the Bible pairs fear of God with safety and vitality, never with cringing.</span>
+      </article>
+
+      <article class="text-card rv">
+        <span class="chip"><span class="hw" lang="he">אוֹצָר</span> · ʾotsar, treasure</span>
+        <blockquote>“He will be the stability of your times, abundance of salvation, wisdom, and knowledge; the fear of the LORD is Zion’s <b>treasure</b>.”</blockquote>
+        <span class="ref">Isaiah 33:6 — not the price of the treasure. The treasure.</span>
+      </article>
+
+      <article class="text-card rv">
+        <span class="chip"><span class="hw" lang="he">סֵפֶר זִכָּרוֹן</span> · book of remembrance</span>
+        <blockquote>“Then those who feared the LORD spoke with one another. The LORD paid attention and heard, and a <b>book of remembrance</b> was written before him.”</blockquote>
+        <span class="ref">Malachi 3:16 — the Old Testament closes with the God-fearers as a remnant God himself records.</span>
+      </article>
+
+      <article class="text-card rv">
+        <span class="chip"><span class="gw">ἐν φόβῳ</span> · in fear</span>
+        <blockquote>“If you call on him as Father… conduct yourselves <b>with fear</b> throughout the time of your exile — for you were ransomed… with the precious blood of Christ.”</blockquote>
+        <span class="ref">1 Peter 1:17–19 — the logic of filial fear: because he is Father, and because the ransom was that costly.</span>
+      </article>
+
+      <article class="text-card rv">
+        <span class="chip"><span class="gw">κόλασις</span> · punishment</span>
+        <blockquote>“There is no fear in love, but perfect love casts out fear. For fear has to do with <b>punishment</b>.”</blockquote>
+        <span class="ref">1 John 4:18 — the tension text. John names precisely which fear love evicts: the fear of kolasis, punishment. The clean, enduring fear of Psalm 19 is not in its sights — a distinction every tradition below has drawn.</span>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= VOICES ================= -->
+<section id="voices">
+  <div class="wrap">
+    <p class="eyebrow rv">The Voices</p>
+    <h2 class="title rv">How the traditions<br>have carried it.</h2>
+    <p class="lede rv">
+      Every major stream of Jewish and Christian thought has wrestled the same two texts —
+      “the fear of the LORD is clean, enduring forever” and “perfect love casts out fear” —
+      and each resolved them with a distinction between two fears.
+    </p>
+
+    <div class="voices-grid">
+
+      <article class="voice rv">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 4v14M8 6.5v9M16 6.5v9M4.8 9v4M19.2 9v4"/><path d="M4.8 13c0 3 2.6 5.5 7.2 5.5s7.2-2.5 7.2-5.5" fill="none"/><path d="M9 21h6"/>
+        </svg>
+        <span class="vtag">Judaism</span>
+        <h3>Yirat Shamayim — the fear of Heaven</h3>
+        <ul>
+          <li><b>Two fears:</b> Baḥya ibn Paquda and the Mussar tradition distinguish <b>yirat ha-ʿonesh</b>
+          (fear of punishment) from <b>yirat ha-romemut</b> (awe before God’s exaltedness) — the first a
+          scaffold, the second the building.</li>
+          <li><b>The one thing God leaves to us:</b> “Everything is in the hands of Heaven <b>except the
+          fear of Heaven</b>” (Berakhot 33b) — reverence as the human being’s sovereign contribution.</li>
+          <li><b>Awe with love:</b> Maimonides taught that contemplating creation produces love and fear
+          in the same instant (Yesodei ha-Torah 2:2); Ḥasidic thought made yirah and ahavah the two
+          wings on which every deed rises.</li>
+        </ul>
+        <p class="pull">“Awe is the beginning of wisdom… Awe precedes faith; it is at the root of faith.”
+        <span class="who">Abraham Joshua Heschel, God in Search of Man</span></p>
+      </article>
+
+      <article class="voice rv">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 21c-4-3.2-6.5-6.6-6.5-10.3C5.5 6.8 8 4 12 4s6.5 2.8 6.5 6.7C18.5 14.4 16 17.8 12 21Z"/><path d="M12 4c-1 1.6-1 3.2 0 4.8 1-1.6 1-3.2 0-4.8ZM8.8 9.5c.4 1.4 1.4 2.3 3.2 2.6M15.2 9.5c-.4 1.4-1.4 2.3-3.2 2.6"/>
+        </svg>
+        <span class="vtag">Catholic</span>
+        <h3>Timor Domini — a gift of the Spirit</h3>
+        <ul>
+          <li><b>The seventh gift:</b> from Isaiah 11 (via the Septuagint and Vulgate), fear of the Lord
+          is one of the seven gifts of the Holy Spirit — infused, not achieved.</li>
+          <li><b>Aquinas’ ladder of fears:</b> worldly, servile, initial, filial (ST II-II q.19). Servile
+          fear (of punishment) is imperfect but useful; <b>filial fear</b> — dread of being separated from
+          the One you love — is not cast out by charity but <em>grows with it</em>, and remains even in heaven.</li>
+          <li><b>Augustine’s ascent:</b> in De Doctrina Christiana, fear is the first of seven steps that
+          end in wisdom — you climb from fear to wisdom, but the ladder never kicks away its first rung.</li>
+        </ul>
+        <p class="pull">Perfect love casts out the fear of punishment — and perfects the fear of the Father.
+        <span class="who">The Thomistic resolution of 1 John 4:18</span></p>
+      </article>
+
+      <article class="voice rv">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 3v18"/><path d="M8 6.5h8"/><path d="M6.5 11h11"/><path d="M8.5 16.5l7-2.6"/>
+        </svg>
+        <span class="vtag">Orthodox</span>
+        <h3>The fear at the chalice</h3>
+        <ul>
+          <li><b>Liturgy:</b> at the climax of the Divine Liturgy the deacon lifts the chalice and calls,
+          “With the fear of God, with faith and with love, <b>draw near</b>” — fear as the posture of
+          approach, not retreat.</li>
+          <li><b>Three dispositions:</b> St. Basil’s classic triad — the <b>slave</b> obeys fearing punishment,
+          the <b>hireling</b> for reward, the <b>son</b> out of love. Fear is the first rung of a ladder whose
+          summit is sonship, and the ascetic tradition treats it as the engine of purification.</li>
+          <li><b>Fear and theosis:</b> for the Fathers, trembling before the divine fire is what keeps
+          communion from becoming presumption — the same fire that terrifies also deifies.</li>
+        </ul>
+        <p class="pull">“With the fear of God, with faith and with love, draw near.”
+        <span class="who">Divine Liturgy of St. John Chrysostom</span></p>
+      </article>
+
+      <article class="voice rv">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 5.5C10 4 7.5 3.6 4 4v15c3.5-.4 6 0 8 1.5 2-1.5 4.5-1.9 8-1.5V4c-3.5-.4-6 0-8 1.5Z"/><path d="M12 5.5v15"/>
+        </svg>
+        <span class="vtag">Reformation</span>
+        <h3>Fear and love, joined at every commandment</h3>
+        <ul>
+          <li><b>Luther</b> begins his explanation of every single commandment with the same six words —
+          fear and love as inseparable, the grammar of all obedience.</li>
+          <li><b>Calvin</b> defined true piety (pietas) as “reverence joined with love of God” — for him,
+          knowledge of God that does not issue in fear and worship is not knowledge at all
+          (Institutes I.2).</li>
+          <li><b>Bunyan</b> devoted an entire treatise (1679) to the fear of God as the mark of grace —
+          arguing that this fear <em>flows from</em> forgiveness (his key text was Psalm 130:4) and
+          seasons every duty of the Christian life.</li>
+        </ul>
+        <p class="pull">“We should fear and love God, so that…”
+        <span class="who">Martin Luther, Small Catechism — the opening of each commandment’s meaning</span></p>
+      </article>
+
+      <article class="voice rv">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="2.4"/><circle cx="12" cy="12" r="6" opacity=".65"/><circle cx="12" cy="12" r="9.5" opacity=".35"/>
+        </svg>
+        <span class="vtag">Modern Thought</span>
+        <h3>The numinous rediscovered</h3>
+        <ul>
+          <li><b>Rudolf Otto</b> (The Idea of the Holy, 1917) argued that beneath all religion lies the
+          <b>numinous</b> — the <em>mysterium tremendum et fascinans</em>, a dread that simultaneously
+          repels and irresistibly attracts. “Fear of God” names an experience ordinary fear cannot.</li>
+          <li><b>C. S. Lewis</b> illustrated it by degrees: fear of a tiger is danger-fear; fear of a ghost
+          is uncanny dread; but the feeling before a mighty spirit is awe — a fear that no information
+          about safety can remove, because it isn’t about safety.</li>
+          <li><b>Recovery:</b> recent theology (e.g., Michael Reeves, Rejoice and Tremble, 2021) has argued
+          the church’s loss of godly fear produced not bolder Christians but shallower ones — that this
+          fear is closer to ecstasy than to anxiety.</li>
+        </ul>
+        <p class="pull">“Safe? … ’Course he isn’t safe. But he’s good.”
+        <span class="who">C. S. Lewis, The Lion, the Witch and the Wardrobe — Mr. Beaver, on Aslan</span></p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= ARC ================= -->
+<section id="arc">
+  <div class="wrap">
+    <p class="eyebrow rv">The Arc</p>
+    <h2 class="title rv">Fear’s journey<br>through the canon.</h2>
+    <p class="lede rv">
+      Traced from Eden to the end, the fear of God follows a single arc: born broken, tested,
+      commanded, taught, promised, embodied, indwelt — and finally sung.
+    </p>
+
+    <div class="arc rv">
+      <span class="arc-pulse" aria-hidden="true"></span>
+
+      <div class="arc-item">
+        <span class="stage">Eden · Genesis 3:10</span>
+        <h3>Fear born broken</h3>
+        <p>The Bible’s first fear: <b>“I was afraid… and I hid myself.”</b> Guilt turns the sound of God’s
+        approach — the most desirable sound in creation — into a threat. Every disordered fear since
+        is a variation on this flight from the Voice.</p>
+      </div>
+
+      <div class="arc-item">
+        <span class="stage">Moriah · Genesis 22</span>
+        <h3>Fear proven as trust</h3>
+        <p>“Now I know that you <b>fear God</b>.” The first person Scripture certifies as a God-fearer is
+        the man in the act of radical trust — and the scene is saturated with the fear/see wordplay.
+        Fear of God here looks nothing like flight; it looks like obedient nearness at unbearable cost.</p>
+      </div>
+
+      <div class="arc-item">
+        <span class="stage">Sinai · Exodus 20:20</span>
+        <h3>Fear commanded — and consoled</h3>
+        <p>“Do not fear… that the fear of him may be before you.” The covenant nation is taught the
+        distinction in a single sentence, while the mountain burns. The people stand far off;
+        <b>Moses draws near to the thick darkness where God is</b>.</p>
+      </div>
+
+      <div class="arc-item">
+        <span class="stage">Wisdom · Proverbs 1:7</span>
+        <h3>Fear becomes a curriculum</h3>
+        <p>Proverbs, Job, and Ecclesiastes make yirʾat YHWH the <b>first principle of knowing anything</b>.
+        Fourteen times Proverbs returns to it: fountain of life, strong confidence, riches and honor,
+        rest at night. The fear of the LORD is now something parents teach children (Ps 34:11).</p>
+      </div>
+
+      <div class="arc-item">
+        <span class="stage">Prophets · Isaiah 11 · Jeremiah 32</span>
+        <h3>Fear promised as gift</h3>
+        <p>The prophets diagnose taught, secondhand religion (Isa 29:13) and promise something new: a
+        Messiah on whom rests <b>the Spirit of the fear of the LORD</b>, and a covenant in which God says
+        “I will put the fear of me <b>in their hearts</b>.” Fear of God will be implanted, not imposed.</p>
+      </div>
+
+      <div class="arc-item">
+        <span class="stage">Christ · Hebrews 5:7</span>
+        <h3>Fear embodied</h3>
+        <p>Jesus does not abolish godly fear — he <b>models</b> it: “he was heard because of his
+        reverence (eulabeia).” He delights in the fear of the LORD (Isa 11:3), commands it (Luke 12:5),
+        and answers every terrified disciple with the theophany formula: <b>“Fear not.”</b> Perfect fear
+        and perfect intimacy, in the same person.</p>
+      </div>
+
+      <div class="arc-item">
+        <span class="stage">Church · Acts 9:31</span>
+        <h3>Fear indwelt</h3>
+        <p>The church walks “in the fear of the Lord <b>and in the comfort of the Holy Spirit</b>” — and
+        grows. The God-fearing Gentiles at the synagogue door (Cornelius, Acts 10) become the bridge
+        by which the gospel reaches the nations. Godly fear, far from repelling, is the door in.</p>
+      </div>
+
+      <div class="arc-item">
+        <span class="stage">The End · Revelation 14:7 · 15:4</span>
+        <h3>Fear made song</h3>
+        <p>The last gospel announced on earth is “<b>Fear God</b> and give him glory,” and the song of the
+        redeemed asks a question expecting no exceptions: <b>“Who will not fear you, O Lord?”</b> The arc
+        that began with hiding in the trees ends with unafraid creatures who tremble with joy.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= CODA ================= -->
+<section class="coda" id="coda">
+  <div class="wrap">
+    <div class="trisagion rv" role="img" aria-label="Rotating ring reading Holy, Holy, Holy in Greek and English, around the Hebrew word qadosh written three times">
+      <svg viewBox="0 0 300 300" aria-hidden="true">
+        <defs>
+          <path id="ringpath" d="M150,150 m-118,0 a118,118 0 1,1 236,0 a118,118 0 1,1 -236,0"/>
+        </defs>
+        <circle cx="150" cy="150" r="98" fill="none" stroke="rgba(229,176,76,.22)" stroke-width="1"/>
+        <text style="font-family:'Avenir Next','Helvetica Neue',sans-serif;font-size:15.5px;font-weight:600;letter-spacing:.34em;fill:#E5B04C">
+          <textPath href="#ringpath">HOLY · HOLY · HOLY · ΑΓΙΟΣ · ΑΓΙΟΣ · ΑΓΙΟΣ ·&#160;</textPath>
+        </text>
+      </svg>
+      <div class="center">
+        <span class="heb" lang="he">קָדוֹשׁ קָדוֹשׁ קָדוֹשׁ</span>
+        <span class="sub">Isaiah 6:3</span>
+      </div>
+    </div>
+
+    <p class="eyebrow rv" style="justify-content:center">The Last Word</p>
+    <p class="coda-verse rv" lang="he">סוֹף דָּבָר הַכֹּל נִשְׁמָע<br>אֶת־הָאֱלֹהִים יְרָא וְאֶת־מִצְוֺתָיו שְׁמוֹר<br>כִּי־זֶה כָּל־הָאָדָם</p>
+    <p class="coda-en rv">“The end of the matter; all has been heard. Fear God and keep his commandments — for this is the whole of humanity.”</p>
+    <p class="ref rv">Ecclesiastes 12:13</p>
+
+    <div class="coda-close body-copy rv">
+      <p>
+        The deep dive ends where the seraphim stand: covering their faces, and singing.
+        In Scripture the fear of the LORD is never the ceiling of the life with God — it is the
+        floor. It is <strong>terror transfigured into wonder, dread converted into devotion,
+        the one fear that makes a person unafraid of everything else</strong>. The Bible’s final
+        answer to “should we fear God?” is neither yes nor no, but a doxology:
+        <em>Who will not fear you, O Lord, and glorify your name? For you alone are holy.</em>
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-grid">
+    <div>
+      <h4>Sources</h4>
+      <p>Hebrew cited from the Masoretic Text; Greek from the New Testament and Septuagint.
+      English renderings adapted from standard translations for closeness to the original wording.
+      Occurrence counts follow standard lexica (BDB, HALOT, BDAG) and are approximate where
+      editions differ.</p>
+    </div>
+    <div>
+      <h4>Further Reading</h4>
+      <p>Rudolf Otto, <em>The Idea of the Holy</em> · A. J. Heschel, <em>God in Search of Man</em> ·
+      Aquinas, <em>Summa Theologiae</em> II-II q.19 · John Bunyan, <em>A Treatise on the Fear of God</em> ·
+      C. S. Lewis, <em>The Problem of Pain</em>, ch. 1 · Michael Reeves, <em>Rejoice and Tremble</em>.</p>
+    </div>
+    <div>
+      <h4>Colophon</h4>
+      <p>Set in darkness by design — “the people stood far off, but Moses drew near to the thick
+      darkness where God was” (Exod 20:21). The palette follows the study’s spine: one band of
+      flame, from garnet terror to golden delight.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var root=document.documentElement;
+    if(!('IntersectionObserver' in window))return;
+    root.classList.add('js');
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}
+      });
+    },{threshold:0.12,rootMargin:'0px 0px -6% 0px'});
+    document.querySelectorAll('.rv').forEach(function(el){io.observe(el);});
+  })();
+</script>
