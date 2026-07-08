@@ -221,16 +221,20 @@
     align-items:stretch;margin:56px 0 60px;
   }
   .paradox-cell{padding:clamp(22px,3.4vw,40px);border:1px solid var(--line);background:var(--smoke)}
-  .paradox-cell .heb{font-family:var(--heb);direction:rtl;font-size:clamp(1.9rem,4vw,2.9rem);color:var(--gold-bright);display:block;margin-bottom:8px}
+  .paradox-cell .heb{font-family:var(--heb);direction:rtl;text-align:left;font-size:clamp(1.9rem,4vw,2.9rem);color:var(--gold-bright);display:block;margin-bottom:8px}
   .paradox-cell h3{font-family:var(--serif);font-size:clamp(1.25rem,2.2vw,1.6rem);font-weight:700;margin:0 0 12px}
   .paradox-cell p{color:var(--ash);font-size:.98rem;margin:0}
   .paradox-root{
     display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;
   }
   .paradox-root .letters{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:0px;
     font-family:var(--heb);font-size:clamp(2.4rem,5vw,3.6rem);color:var(--ember);
-    letter-spacing:.18em;direction:rtl;
     animation:rootpulse 5s ease-in-out infinite;
+    line-height:1.0;
   }
   @keyframes rootpulse{0%,100%{opacity:.75}50%{opacity:1;text-shadow:0 0 30px rgba(223,91,40,.5)}}
   .paradox-root .cap{font-family:var(--sans);font-size:.68rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--faint);max-width:14ch}
@@ -757,19 +761,19 @@
     <div class="paradox-grid">
       <div class="paradox-cell rv">
         <span class="heb" lang="he">אַל־תִּירָא</span>
-        <h3>ʾal-tiraʾ — “Fear not”</h3>
+        <h3>ʾal-tiraʾ — “Fear&nbsp;not”</h3>
         <p>Spoken to Abram, Hagar, Moses, Joshua, Mary, the shepherds, the women at the tomb.
         Counted variously, some form of “do not fear / do not be afraid” appears well over a
         hundred times — the most repeated reassurance in Scripture. It is almost always said by
         God, or by someone standing where God has just appeared.</p>
       </div>
       <div class="paradox-root rv" aria-hidden="true">
-        <span class="letters" lang="he">י ר א</span>
+        <span class="letters" lang="he"><span>י</span><span>ר</span><span>א</span></span>
         <span class="cap">One root — yod · resh · alef</span>
       </div>
       <div class="paradox-cell rv">
         <span class="heb" lang="he">אֶת־הָאֱלֹהִים יְרָא</span>
-        <h3>et-haʾElohim yeraʾ — “Fear God”</h3>
+        <h3>et-haʾElohim yeraʾ — “Fear&nbsp;God”</h3>
         <p>Ecclesiastes’ last word, Wisdom’s first principle, the Torah’s summary requirement
         (Deut 10:12), and the eternal gospel of Revelation 14:7. In Luke 12, Jesus commands this
         fear and forbids the other within four breaths: <em>“Fear him… Fear not, little flock.”</em></p>
