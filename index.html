@@ -1512,7 +1512,7 @@
   </div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
 <script>
 (function(){
   'use strict';
@@ -1562,12 +1562,8 @@
   // Initialize Lenis smooth scroll
   var lenis;
   if (!reduced && typeof Lenis !== 'undefined') {
-    lenis = new Lenis({
-      duration: 1.2,
-      easing: function(t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
-      smoothWheel: true,
-      smoothTouch: false,
-    });
+    document.documentElement.style.scrollBehavior = 'auto';
+    lenis = new Lenis();
     function raf(time) {
       lenis.raf(time);
       requestAnimationFrame(raf);
