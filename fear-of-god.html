@@ -282,10 +282,36 @@
   .lex-gloss{font-family:var(--serif);font-size:1.16rem;font-weight:700;line-height:1.35;color:var(--ivory)}
   .lex-range{font-size:.93rem;color:var(--ash);line-height:1.6}
   .lex-verse{
-    margin-top:auto;border-top:1px solid var(--line-soft);padding-top:14px;
-    font-size:.95rem;font-style:italic;color:var(--ivory);line-height:1.6;
+    margin-top:auto;
+    margin-inline:0;
+    margin-bottom:0;
+    padding:14px 16px;
+    background:var(--smoke2);
+    border:1px solid var(--line-soft);
+    border-radius:6px;
+    font-size:.94rem;
+    font-style:italic;
+    color:var(--ivory);
+    line-height:1.6;
+    transition:border-color .3s;
   }
-  .lex-verse .ref{display:block;margin-top:8px;font-style:normal}
+  .lex-verse .ref{
+    display:block;
+    margin-top:8px;
+    font-style:normal;
+  }
+  .lex-card:hover .lex-verse{
+    border-color:var(--line);
+  }
+  .lex-card.greek .lex-verse{
+    border-color:var(--slate-dim);
+  }
+  .lex-card.greek:hover .lex-verse{
+    border-color:rgba(143,180,206,.35);
+  }
+  [data-theme="light"] .lex-card.greek:hover .lex-verse{
+    border-color:rgba(56,101,138,.5);
+  }
 
   /* ---------- spectrum ---------- */
   .spectrum-band{
