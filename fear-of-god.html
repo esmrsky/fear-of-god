@@ -480,15 +480,14 @@
     position:absolute;left:3px;top:0;width:12px;height:12px;border-radius:50%;
     background:radial-gradient(circle,#FBE7B8,#E5B04C 60%,transparent 75%);
     box-shadow:0 0 18px 4px rgba(229,176,76,.55);
-    animation:travel 9s ease-in-out infinite;
   }
-  @keyframes travel{0%{top:0;opacity:0}6%{opacity:1}94%{opacity:1}100%{top:calc(100% - 12px);opacity:0}}
   .arc-item{position:relative;padding:0 0 44px}
   .arc-item:last-child{padding-bottom:0}
   .arc-item::before{
     content:"";position:absolute;left:calc(-1*clamp(28px,5vw,54px) + 3px);top:9px;
     width:12px;height:12px;border-radius:50%;background:var(--night);
     border:2px solid var(--gold);
+    box-sizing:border-box;
   }
   .arc-item .stage{font-family:var(--sans);font-size:.7rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:6px}
   .arc-item h3{font-family:var(--serif);font-size:1.35rem;font-weight:700;margin:0 0 8px}
@@ -1559,7 +1558,22 @@
 
   /* ---------- progress bar, back-to-top, hero parallax ---------- */
   var bar=document.querySelector('.progress b'),toTop=document.querySelector('.to-top'),
-      heroInner=document.querySelector('.hero-inner'),tick=false;
+      heroInner=document.querySelector('.hero-inner'),
+      arc=document.querySelector('.arc'),arcPulse=document.querySelector('.arc-pulse'),
+      tick=false,arcTop=0,arcHeight=0;
+
+  function measureArc(){
+    if(arc){
+      var r=arc.getBoundingClientRect();
+      arcTop=r.top+(window.scrollY||document.documentElement.scrollTop);
+      arcHeight=r.height;
+    }
+  }
+  measureArc();
+  addEventListener('resize',measureArc);
+  addEventListener('DOMContentLoaded',measureArc);
+  addEventListener('load',measureArc);
+
   function onScroll(){
     if(tick)return;tick=true;
     requestAnimationFrame(function(){
@@ -1568,6 +1582,17 @@
       if(toTop)toTop.classList.toggle('show',y>700);
       if(heroInner&&!reduced){
         if(y<900){heroInner.style.transform='translateY('+(y*0.14)+'px)';heroInner.style.opacity=Math.max(0,1-y/750);}
+      }
+      if(arc&&arcPulse&&!reduced){
+        var centerY=window.innerHeight*0.45;
+        var progress=(centerY-(arcTop-y))/arcHeight;
+        var clamped=Math.max(0,Math.min(1,progress));
+        arcPulse.style.top='calc('+(clamped*100)+'% - 6px)';
+        var opacity=1;
+        if(clamped<=0||clamped>=1)opacity=0;
+        else if(clamped<0.08)opacity=clamped/0.08;
+        else if(clamped>0.92)opacity=(1-clamped)/0.08;
+        arcPulse.style.opacity=opacity;
       }
       hidePop();
       tick=false;
