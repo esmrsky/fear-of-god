@@ -476,11 +476,6 @@
     background:linear-gradient(180deg,#5B1A0F,#A93018 30%,#DF5B28 55%,#E5B04C 80%,#F5E3B8);
     border-radius:2px;
   }
-  .arc-pulse{
-    position:absolute;left:3px;top:0;width:12px;height:12px;border-radius:50%;
-    background:radial-gradient(circle,#FBE7B8,#E5B04C 60%,transparent 75%);
-    box-shadow:0 0 18px 4px rgba(229,176,76,.55);
-  }
   .arc-item{position:relative;padding:0 0 44px}
   .arc-item:last-child{padding-bottom:0}
   .arc-item::before{
@@ -488,6 +483,13 @@
     width:12px;height:12px;border-radius:50%;background:var(--night);
     border:2px solid var(--gold);
     box-sizing:border-box;
+    transition:background-color .4s ease, border-color .4s ease, box-shadow .4s ease, transform .4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .arc-item.active::before{
+    background:var(--gold);
+    border-color:var(--gold-bright);
+    box-shadow:0 0 14px 4px rgba(229,176,76,.55);
+    transform:scale(1.15);
   }
   .arc-item .stage{font-family:var(--sans);font-size:.7rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:6px}
   .arc-item h3{font-family:var(--serif);font-size:1.35rem;font-weight:700;margin:0 0 8px}
@@ -675,9 +677,10 @@
   @media (prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
     .hero-heb,.embers i,.scroll-cue::after,.paradox-root .letters,
-    .spectrum-band,.arc-pulse,.seal-mark,.hw-float,.flash{animation:none}
-    .embers,.arc-pulse,.hero-glow{display:none}
+    .spectrum-band,.seal-mark,.hw-float,.flash{animation:none}
+    .embers,.hero-glow{display:none}
     .js .rv{opacity:1;transform:none;transition:none}
+    .arc-item.active::before{transform:none;box-shadow:none}
   }
 </style>
 
@@ -1365,8 +1368,6 @@
     </p>
 
     <div class="arc rv">
-      <span class="arc-pulse" aria-hidden="true"></span>
-
       <div class="arc-item">
         <span class="stage">Eden · Genesis 3:10</span>
         <h3>Fear born broken</h3>
@@ -1511,6 +1512,7 @@
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
 <script>
 (function(){
   'use strict';
@@ -1557,16 +1559,38 @@
   }
 
   /* ---------- progress bar, back-to-top, hero parallax ---------- */
+  // Initialize Lenis smooth scroll
+  var lenis;
+  if (!reduced && typeof Lenis !== 'undefined') {
+    lenis = new Lenis({
+      duration: 1.2,
+      easing: function(t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
+      smoothWheel: true,
+      smoothTouch: false,
+    });
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+  }
+
   var bar=document.querySelector('.progress b'),toTop=document.querySelector('.to-top'),
       heroInner=document.querySelector('.hero-inner'),
-      arc=document.querySelector('.arc'),arcPulse=document.querySelector('.arc-pulse'),
-      tick=false,arcTop=0,arcHeight=0;
+      arc=document.querySelector('.arc'),
+      arcItems=document.querySelectorAll('.arc-item'),
+      tick=false,arcTop=0,arcHeight=0,itemOffsets=[];
 
   function measureArc(){
     if(arc){
       var r=arc.getBoundingClientRect();
-      arcTop=r.top+(window.scrollY||document.documentElement.scrollTop);
+      var scrollTop=window.scrollY||document.documentElement.scrollTop;
+      arcTop=r.top+scrollTop;
       arcHeight=r.height;
+      itemOffsets=Array.prototype.map.call(arcItems,function(item){
+        var ir=item.getBoundingClientRect();
+        return ir.top+scrollTop+15; // vertical center of the circle node
+      });
     }
   }
   measureArc();
@@ -1583,23 +1607,22 @@
       if(heroInner&&!reduced){
         if(y<900){heroInner.style.transform='translateY('+(y*0.14)+'px)';heroInner.style.opacity=Math.max(0,1-y/750);}
       }
-      if(arc&&arcPulse&&!reduced){
+      if(arc&&!reduced){
         var centerY=window.innerHeight*0.45;
-        var progress=(centerY-(arcTop-y))/arcHeight;
-        var clamped=Math.max(0,Math.min(1,progress));
-        arcPulse.style.top='calc('+(clamped*100)+'% - 6px)';
-        var opacity=1;
-        if(clamped<=0||clamped>=1)opacity=0;
-        else if(clamped<0.08)opacity=clamped/0.08;
-        else if(clamped>0.92)opacity=(1-clamped)/0.08;
-        arcPulse.style.opacity=opacity;
+        var currentFocus=y+centerY;
+        for(var i=0;i<arcItems.length;i++){
+          arcItems[i].classList.toggle('active',currentFocus>=itemOffsets[i]);
+        }
       }
       hidePop();
       tick=false;
     });
   }
   addEventListener('scroll',onScroll,{passive:true});onScroll();
-  if(toTop)toTop.addEventListener('click',function(){scrollTo({top:0,behavior:reduced?'auto':'smooth'});});
+  if(toTop)toTop.addEventListener('click',function(){
+    if(typeof lenis!=='undefined'&&lenis)lenis.scrollTo(0);
+    else scrollTo({top:0,behavior:reduced?'auto':'smooth'});
+  });
 
   /* ---------- hero pointer glow ---------- */
   var hero=document.querySelector('.hero'),glow=document.querySelector('.hero-glow');
@@ -1795,7 +1818,8 @@
   function jumpTo(target){
     if(!target)return;
     hidePop();
-    target.scrollIntoView({behavior:reduced?"auto":"smooth",block:"center"});
+    if(typeof lenis!=='undefined'&&lenis)lenis.scrollTo(target,{offset:-50});
+    else target.scrollIntoView({behavior:reduced?"auto":"smooth",block:"center"});
     var card=target.closest(".lex-card,.thread,.text-card,.voice,.arc-item,.paradox-cell,.keystone")||target;
     card.classList.remove("flash");void card.offsetWidth;card.classList.add("flash");
   }
