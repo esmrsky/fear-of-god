@@ -1558,46 +1558,6 @@
   }
 
   /* ---------- progress bar, back-to-top, hero parallax ---------- */
-  // Vanilla smooth scrolling for mouse wheel
-  if (!reduced) {
-    var targetY = window.scrollY || document.documentElement.scrollTop;
-    var currentY = targetY;
-    var isScrolling = false;
-
-    window.addEventListener('scroll', function() {
-      if (!isScrolling) {
-        currentY = targetY = window.scrollY || document.documentElement.scrollTop;
-      }
-    }, { passive: true });
-
-    window.addEventListener('wheel', function(e) {
-      if (Math.abs(e.deltaY) < 40 && e.deltaMode === 0) {
-        return;
-      }
-      e.preventDefault();
-      targetY += e.deltaY;
-      targetY = Math.max(0, Math.min(targetY, root.scrollHeight - root.clientHeight));
-      if (!isScrolling) {
-        isScrolling = true;
-        smoothScrollLoop();
-      }
-    }, { passive: false });
-
-    function smoothScrollLoop() {
-      if (!isScrolling) return;
-      var diff = targetY - currentY;
-      if (Math.abs(diff) < 0.5) {
-        currentY = targetY;
-        scrollTo(0, currentY);
-        isScrolling = false;
-      } else {
-        currentY += diff * 0.085;
-        scrollTo(0, currentY);
-        requestAnimationFrame(smoothScrollLoop);
-      }
-    }
-  }
-
   var bar=document.querySelector('.progress b'),toTop=document.querySelector('.to-top'),
       heroInner=document.querySelector('.hero-inner'),
       arc=document.querySelector('.arc'),
