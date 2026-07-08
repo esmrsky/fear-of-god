@@ -1,6 +1,11 @@
 <meta charset="utf-8">
 <title>YIRAH — The Fear of the LORD</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A visual deep-dive into the fear of the LORD — the Hebrew and Greek vocabulary of fear, its threads through Scripture, and how the traditions carried it.">
+<meta property="og:title" content="YIRAH — The Fear of the LORD">
+<meta property="og:description" content="Nine words English translates as one. A study of the Bible's strangest gift — terror transfigured into wonder.">
+<meta property="og:type" content="article">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23E5B04C' d='M12 2c2 2.7 3 4.6 1 7 2-.5 2.7-1.7 3-3.4 1.7 2.3 2.5 4.9 1.4 7.6-1.1 2.8-3.5 4.3-6.2 4.3s-5.2-1.5-6.2-4.3C3.8 10.5 5 7.9 6.8 5.9c.2 1.5.8 2.6 2.2 3.4C7.4 6.9 9.5 4.2 12 2Z'/%3E%3C/svg%3E">
 <script>try{if(localStorage.getItem('fog-theme')==='light')document.documentElement.setAttribute('data-theme','light')}catch(e){}</script>
 <style>
   :root{
@@ -113,8 +118,8 @@
 
   /* ---------- hero ---------- */
   .hero{
-    min-height:92vh;display:flex;flex-direction:column;justify-content:center;
-    position:relative;overflow:hidden;padding-block:120px 90px;border-top:none;
+    min-height:92vh;min-height:92svh;display:flex;flex-direction:column;justify-content:flex-start;
+    position:relative;overflow:hidden;padding-block:clamp(90px,14vh,160px) 90px;border-top:none;
   }
   .hero-bg{
     position:absolute;inset:0;pointer-events:none;
@@ -123,12 +128,12 @@
       radial-gradient(ellipse 46% 34% at 50% 112%, rgba(229,176,76,.26), transparent 60%),
       radial-gradient(ellipse 90% 70% at 50% -20%, rgba(20,14,10,.0), transparent);
   }
-  .hero-inner{position:relative;text-align:center;margin-inline:auto;max-width:960px}
+  .hero-inner{position:relative;z-index:2;text-align:center;margin-inline:auto;max-width:960px}
   .hero-eyebrow{justify-content:center;margin-bottom:34px}
   .hero-eyebrow::after{content:"";display:block;width:34px;height:1px;background:var(--gold);opacity:.7}
   .hero-heb{
     font-family:var(--heb);direction:rtl;
-    font-size:clamp(4.2rem,14vw,10.5rem);line-height:1.15;
+    font-size:clamp(3.4rem,11vw,8.2rem);line-height:1.15;
     margin:0 0 10px;color:var(--gold-bright);
     text-shadow:0 0 60px rgba(229,176,76,.28),0 0 140px rgba(223,91,40,.22);
     animation:breathe 7s ease-in-out infinite;
@@ -162,6 +167,36 @@
     animation:cue 2.6s ease-in-out infinite;transform-origin:top;
   }
   @keyframes cue{0%,100%{transform:scaleY(.4);opacity:.4}50%{transform:scaleY(1);opacity:1}}
+
+  /* floating word constellation */
+  .hero-words{position:absolute;inset:0;pointer-events:none;z-index:1}
+  .hw-float{
+    position:absolute;display:flex;flex-direction:column;align-items:center;gap:3px;
+    pointer-events:auto;cursor:pointer;text-align:center;opacity:.5;
+    transition:opacity .35s;
+    animation:floaty var(--fd,11s) ease-in-out var(--fdl,0s) infinite alternate;
+  }
+  .hw-float:hover,.hw-float:focus-visible{opacity:1}
+  .hw-float b{font-family:var(--heb);font-weight:400;font-size:clamp(1.15rem,1.9vw,1.6rem);color:var(--gold-bright);line-height:1.3}
+  .hw-float.greek b{font-family:var(--serif);font-style:italic;color:var(--slate)}
+  .hw-float i{font-family:var(--sans);font-style:normal;font-size:.6rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);white-space:nowrap}
+  @keyframes floaty{from{transform:translateY(-9px)}to{transform:translateY(11px)}}
+  .hw-float.f1{left:7%;top:21%;--fd:12s;--fdl:0s}
+  .hw-float.f2{right:8%;top:19%;--fd:10s;--fdl:1.6s}
+  .hw-float.f3{left:4%;top:46%;--fd:13s;--fdl:3s}
+  .hw-float.f4{right:5%;top:44%;--fd:11s;--fdl:.8s}
+  .hw-float.f5{left:9%;top:72%;--fd:12.5s;--fdl:2.2s}
+  .hw-float.f6{right:10%;top:70%;--fd:10.5s;--fdl:4s}
+  .hw-float.f7{left:26%;top:86%;--fd:11.5s;--fdl:1.2s}
+  .hw-float.f8{right:26%;top:86%;--fd:13.5s;--fdl:2.8s}
+  .hw-float.f9{right:16%;top:58%;--fd:12s;--fdl:5s}
+  @media (max-width:900px){
+    .scroll-cue{display:none}
+    .hero-words{position:static;display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:40px;pointer-events:auto}
+    .hw-float{position:static;animation:none;opacity:.9;padding:8px 12px;border:1px solid var(--line-soft);border-radius:6px}
+    .hw-float b{font-size:1.05rem}
+    .hw-float i{font-size:.56rem}
+  }
 
   /* embers */
   .embers{position:absolute;inset:0;pointer-events:none;overflow:hidden}
@@ -204,7 +239,14 @@
     .paradox-root{padding-block:8px}
   }
   .keystone{
-    border-left:2px solid var(--gold);padding:6px 0 6px clamp(20px,3vw,34px);margin:52px 0 0;
+    position:relative;overflow:hidden;margin:52px 0 0;
+    background:var(--smoke);border:1px solid var(--line);border-left:2px solid var(--gold);
+    padding:clamp(26px,4vw,42px);
+  }
+  .keystone::after{
+    content:"ירא";position:absolute;right:14px;bottom:-44px;
+    font-family:var(--heb);font-size:10rem;line-height:1;
+    color:var(--gold);opacity:.055;pointer-events:none;
   }
   .keystone .heb-line{font-family:var(--heb);direction:rtl;text-align:right;font-size:clamp(1.3rem,2.6vw,1.8rem);color:var(--gold-bright);line-height:1.9;margin-bottom:10px}
   .keystone .en-line{font-size:clamp(1.12rem,2vw,1.35rem);font-style:italic;color:var(--ivory);line-height:1.6;margin-bottom:12px;max-width:60ch}
@@ -269,6 +311,12 @@
   .spectrum-stop:nth-child(4) .sl{color:#E5A649}
   .spectrum-stop:nth-child(5) .sl{color:#EFCB86}
   .spectrum-stop:nth-child(6) .sl{color:#FAF0DC}
+  .spectrum-stop:nth-child(1) .sw{color:#D06A4E}
+  .spectrum-stop:nth-child(2) .sw{color:#DD7E4A}
+  .spectrum-stop:nth-child(3) .sw{color:#E59454}
+  .spectrum-stop:nth-child(4) .sw{color:#E8B368}
+  .spectrum-stop:nth-child(5) .sw{color:#F0D093}
+  .spectrum-stop:nth-child(6) .sw{color:#F8ECD3}
   @media (max-width:900px){
     .spectrum-band{display:none}
     .spectrum-stops{grid-template-columns:1fr;gap:0;border-left:6px solid transparent;
@@ -419,14 +467,20 @@
 
   /* ---------- coda ---------- */
   .coda{text-align:center;overflow:hidden}
-  .trisagion{position:relative;width:min(340px,74vw);margin:0 auto 54px;aspect-ratio:1}
-  .trisagion svg{width:100%;height:100%;display:block;animation:spin 60s linear infinite}
-  @keyframes spin{to{transform:rotate(360deg)}}
-  .trisagion .center{
-    position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+  .seal{margin:0 auto 54px}
+  .seal-mark{
+    width:min(230px,58vw);height:auto;display:block;margin:0 auto 26px;color:var(--gold);
+    animation:sealglow 6s ease-in-out infinite;
   }
-  .trisagion .center .heb{font-family:var(--heb);font-size:clamp(1.5rem,4vw,2.1rem);color:var(--gold-bright);direction:rtl;line-height:1.5}
-  .trisagion .center .sub{font-family:var(--sans);font-size:.66rem;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--faint)}
+  @keyframes sealglow{
+    0%,100%{filter:drop-shadow(0 0 6px rgba(229,176,76,.18))}
+    50%{filter:drop-shadow(0 0 18px rgba(229,176,76,.4))}
+  }
+  .seal-word{
+    font-family:var(--sans);font-size:clamp(.9rem,1.8vw,1.05rem);font-weight:600;
+    letter-spacing:.26em;text-transform:uppercase;color:var(--gold-bright);margin:0 0 8px;
+  }
+  .seal-sub{font-family:var(--sans);font-size:.72rem;font-weight:500;letter-spacing:.1em;color:var(--faint);margin:0}
   .coda-verse{
     font-family:var(--heb);direction:rtl;font-size:clamp(1.35rem,3vw,2rem);
     color:var(--gold-bright);line-height:2;max-width:34ch;margin:0 auto 18px;
@@ -449,8 +503,12 @@
   .lr-label{font-family:var(--sans);font-size:.64rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);width:100%}
   .lr{font-family:var(--sans);font-size:.71rem;font-weight:600;letter-spacing:.04em;color:var(--ash);border:1px solid var(--line);padding:3px 8px;border-radius:3px;white-space:nowrap}
   .lex-card.greek .lr{border-color:var(--slate-dim)}
-  .trisagion .center .qad{font-family:var(--sans);font-size:1rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-bright)}
-  .trisagion circle{stroke:var(--line)}
+  p{text-wrap:pretty}
+  .dropcap::first-letter{
+    float:left;font-family:var(--serif);font-size:3.4em;line-height:.82;
+    padding:6px 12px 0 0;color:var(--gold);font-weight:700;
+  }
+  @media (hover:none){.anchor-btn{opacity:.45}}
 
   /* ---------- experience layer ---------- */
   .progress{position:fixed;top:0;left:0;right:0;height:3px;z-index:70;pointer-events:none}
@@ -537,6 +595,15 @@
   [data-theme="light"] .spectrum-stop:nth-child(4) .sl{color:#9F7118}
   [data-theme="light"] .spectrum-stop:nth-child(5) .sl{color:#8F6210}
   [data-theme="light"] .spectrum-stop:nth-child(6) .sl{color:#77602F}
+  [data-theme="light"] .spectrum-stop:nth-child(1) .sw{color:#A93D22}
+  [data-theme="light"] .spectrum-stop:nth-child(2) .sw{color:#B0511E}
+  [data-theme="light"] .spectrum-stop:nth-child(3) .sw{color:#A8641F}
+  [data-theme="light"] .spectrum-stop:nth-child(4) .sw{color:#9F7118}
+  [data-theme="light"] .spectrum-stop:nth-child(5) .sw{color:#8F6210}
+  [data-theme="light"] .spectrum-stop:nth-child(6) .sw{color:#77602F}
+  [data-theme="light"] .hw-float b{color:var(--gold-bright)}
+  [data-theme="light"] .seal-mark{animation:none;filter:drop-shadow(0 0 10px rgba(159,113,24,.25))}
+  [data-theme="light"] .keystone::after{opacity:.07}
   [data-theme="light"] .lex-card.yirah-card{border-left-color:#B98F2E}
   [data-theme="light"] .lex-card.yirah-card .lex-icon{color:#B98F2E}
   [data-theme="light"] .lex-card.yare-card{border-left-color:#A08A52}
@@ -573,13 +640,13 @@
   }
 
   /* ---------- reveal ---------- */
-  .js .rv{opacity:0;transform:translateY(26px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.65,.25,1)}
+  .js .rv{opacity:0;transform:translateY(26px);transition:opacity .9s ease var(--rvd,0s),transform .9s cubic-bezier(.2,.65,.25,1) var(--rvd,0s)}
   .js .rv.in{opacity:1;transform:none}
 
   @media (prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
     .hero-heb,.embers i,.scroll-cue::after,.paradox-root .letters,
-    .spectrum-band,.arc-pulse,.trisagion svg,.flash{animation:none}
+    .spectrum-band,.arc-pulse,.seal-mark,.hw-float,.flash{animation:none}
     .embers,.arc-pulse,.hero-glow{display:none}
     .js .rv{opacity:1;transform:none;transition:none}
   }
@@ -636,6 +703,17 @@
       beneath it, the threads that run through it, and the traditions that have carried it.
     </p>
   </div>
+  <div class="hero-words">
+    <span class="hw-float f1" data-target=".yirah-card"><b lang="he">יִרְאָה</b><i>yirʾah · reverence</i></span>
+    <span class="hw-float f2" data-target=".pachad-card"><b lang="he">פַּחַד</b><i>paḥad · dread</i></span>
+    <span class="hw-float f3" data-target=".yare-card"><b lang="he">יָרֵא</b><i>yareʾ · to fear, revere</i></span>
+    <span class="hw-float f4" data-target=".emah-card"><b lang="he">אֵימָה</b><i>ʾemah · terror</i></span>
+    <span class="hw-float f5" data-target=".charad-card"><b lang="he">חָרַד</b><i>ḥarad · to tremble</i></span>
+    <span class="hw-float f6 greek" data-target=".phobos-card"><b>φόβος</b><i>phobos · fear</i></span>
+    <span class="hw-float f7 greek" data-target=".eulabeia-card"><b>εὐλάβεια</b><i>eulabeia · reverent care</i></span>
+    <span class="hw-float f8 greek" data-target=".deos-card"><b>δέος</b><i>deos · awe</i></span>
+    <span class="hw-float f9 greek" data-target=".sebomai-card"><b>σέβομαι</b><i>sebomai · to revere</i></span>
+  </div>
   <p class="scroll-cue">Descend</p>
 </header>
 
@@ -673,7 +751,7 @@
     </div>
 
     <div class="body-copy rv">
-      <p>
+      <p class="dropcap">
         The first fear in the Bible is not reverence. It is Adam in the trees:
         <em>“I was afraid… and I hid myself”</em> (<i class="tl">va-ʾiraʾ… va-ʾeḥaveʾ</i>, Gen 3:10). From that verse forward, Scripture knows two fears built on one root: a fear that
         <em>flees</em> the Voice, and a fear that <em>draws near</em> to it. The whole biblical story of
@@ -1332,20 +1410,19 @@
 <!-- ================= CODA ================= -->
 <section class="coda" id="coda">
   <div class="wrap">
-    <div class="trisagion rv" role="img" aria-label="Rotating ring reading Holy, Holy, Holy in Greek and English, around the Hebrew word qadosh written three times">
-      <svg viewBox="0 0 300 300" aria-hidden="true">
-        <defs>
-          <path id="ringpath" d="M150,150 m-118,0 a118,118 0 1,1 236,0 a118,118 0 1,1 -236,0"/>
-        </defs>
-        <circle cx="150" cy="150" r="98" fill="none" stroke="rgba(229,176,76,.22)" stroke-width="1"/>
-        <text style="font-family:'Avenir Next','Helvetica Neue',sans-serif;font-size:15.5px;font-weight:600;letter-spacing:.34em;fill:var(--gold)">
-          <textPath href="#ringpath">HOLY · HOLY · HOLY · ΑΓΙΟΣ · ΑΓΙΟΣ · ΑΓΙΟΣ ·&#160;</textPath>
-        </text>
+    <div class="seal rv">
+      <svg class="seal-mark" viewBox="0 0 220 220" aria-hidden="true">
+        <g fill="none" stroke="currentColor" stroke-linecap="round">
+          <circle cx="110" cy="110" r="96" stroke-opacity=".16" stroke-width="1"/>
+          <circle cx="110" cy="110" r="78" stroke-opacity=".45" stroke-width="1.3"
+                  stroke-dasharray="140 23.3" transform="rotate(-78 110 110)"/>
+        </g>
+        <path fill="none" stroke="currentColor" stroke-width=".62" stroke-linecap="round" stroke-linejoin="round"
+              transform="translate(74,74) scale(3)"
+              d="M12 3c1.8 2.4 2.6 4 .9 6.1C15.5 8.6 16 7.5 16.3 6c1.5 2 2.2 4.3 1.2 6.7-1 2.5-3.1 3.8-5.5 3.8s-4.6-1.3-5.5-3.8C5.4 10.3 6.4 8 8 6.2c.2 1.3.7 2.3 2 3C8.4 6.9 10.2 5 12 3Z"/>
       </svg>
-      <div class="center">
-        <span class="qad">Qadosh · Qadosh · Qadosh</span>
-        <span class="sub">Isaiah 6:3</span>
-      </div>
+      <p class="seal-word">Qadosh · Qadosh · Qadosh</p>
+      <p class="seal-sub">“Holy, holy, holy is the LORD of hosts” — Isaiah 6:3 · sung by the seraphim, the “burning ones”</p>
     </div>
 
     <p class="eyebrow rv" style="justify-content:center">The Last Word</p>
@@ -1426,8 +1503,16 @@
   /* ---------- reveal + scrollspy ---------- */
   if('IntersectionObserver' in window){
     root.classList.add('js');
+    document.querySelectorAll(".lex-grid,.threads-grid,.voices-grid,.texts-wall").forEach(function(grid){
+      Array.prototype.forEach.call(grid.children,function(c,i){c.style.setProperty("--rvd",(Math.min(i,8)*80)+"ms");});
+    });
     var io=new IntersectionObserver(function(es){
-      es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+      es.forEach(function(e){
+        if(e.isIntersecting){
+          e.target.classList.add('in');io.unobserve(e.target);
+          setTimeout(function(){e.target.style.removeProperty('--rvd');},1900);
+        }
+      });
     },{threshold:0.12,rootMargin:'0px 0px -6% 0px'});
     document.querySelectorAll('.rv').forEach(function(el){io.observe(el);});
     var navMap={};
@@ -1602,7 +1687,7 @@
   }
   [".paradox-cell p",".body-copy p",".lex-range",".lex-verse .ref",".spectrum-stop .sd",
    ".thread p",".thread .refs",".text-card .ref",".voice li",".arc-item p",".arc-item .stage",
-   ".keystone .ref",".coda-close p",".coda .ref",".trisagion .sub","footer p"
+   ".keystone .ref",".coda-close p",".coda .ref",".seal-sub","footer p"
   ].forEach(function(sel){document.querySelectorAll(sel).forEach(wrapRefs);});
 
   document.querySelectorAll(".lr").forEach(function(chip){
@@ -1615,7 +1700,7 @@
   });
 
   /* ---------- verse popover ---------- */
-  var pop=document.createElement("div");pop.className="vpop";pop.setAttribute("role","tooltip");
+  var pop=document.createElement("div");pop.className="vpop";pop.id="vpop";pop.setAttribute("role","tooltip");
   pop.innerHTML='<p class="vp-ref"></p><p class="vp-txt"></p>';
   document.body.appendChild(pop);
   var popRef=pop.querySelector(".vp-ref"),popTxt=pop.querySelector(".vp-txt"),popFor=null,hideT=null;
@@ -1623,6 +1708,7 @@
     if(popFor===el)return;
     var key=el.getAttribute("data-k"),e=DB[key];if(!e)return;
     clearTimeout(hideT);popFor=el;
+    el.setAttribute("aria-describedby","vpop");
     popRef.textContent=fullLabel(key);popTxt.innerHTML=e;
     pop.style.left="0px";pop.style.top="-9999px";pop.classList.add("show");
     var r=el.getBoundingClientRect(),pw=pop.offsetWidth,ph=pop.offsetHeight;
@@ -1631,7 +1717,7 @@
     var y=(above?r.top-ph-10:r.bottom+10)+(window.scrollY||root.scrollTop);
     pop.style.left=(x+(window.scrollX||0))+"px";pop.style.top=y+"px";
   }
-  function hidePop(){if(!popFor)return;popFor=null;pop.classList.remove("show");}
+  function hidePop(){if(!popFor)return;popFor.removeAttribute("aria-describedby");popFor=null;pop.classList.remove("show");}
   function scheduleHide(){clearTimeout(hideT);hideT=setTimeout(hidePop,180);}
   pop.addEventListener("mouseenter",function(){clearTimeout(hideT);});
   pop.addEventListener("mouseleave",scheduleHide);
@@ -1664,6 +1750,11 @@
     if(!target)return;
     stop.setAttribute("title","Jump to the word study");
     stop.addEventListener("click",function(){jumpTo(target);});
+  });
+  document.querySelectorAll(".hw-float").forEach(function(f){
+    f.addEventListener("click",function(){
+      jumpTo(document.querySelector(f.getAttribute("data-target")));
+    });
   });
 
   /* ---------- scripture index ---------- */
