@@ -1,6 +1,7 @@
 <meta charset="utf-8">
 <title>YIRAH — The Fear of the LORD</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>try{if(localStorage.getItem('fog-theme')==='light')document.documentElement.setAttribute('data-theme','light')}catch(e){}</script>
 <style>
   :root{
     color-scheme: dark;
@@ -22,6 +23,27 @@
     --sans:"Avenir Next","Helvetica Neue","Segoe UI",Helvetica,Arial,sans-serif;
     --heb:"SBL Hebrew","Ezra SIL","Times New Roman",var(--serif);
     --fire:linear-gradient(90deg,#6E1A0E 0%,#A93018 22%,#DF5B28 45%,#E5B04C 68%,#F2DCA0 86%,#FBF4E4 100%);
+    --nav-bg:rgba(16,12,10,.82);
+    --shadow:0 8px 30px rgba(0,0,0,.3);
+  }
+  :root[data-theme="light"]{
+    color-scheme: light;
+    --night:#F6EEDF;
+    --smoke:#FCF7EC;
+    --smoke2:#F1E7D3;
+    --line:rgba(122,88,26,.30);
+    --line-soft:rgba(122,88,26,.15);
+    --ivory:#241B10;
+    --ash:#5D4E3A;
+    --faint:#7A6A4E;
+    --gold:#8F6210;
+    --gold-bright:#7A520C;
+    --ember:#B8431C;
+    --garnet:#8E2A18;
+    --slate:#38658A;
+    --slate-dim:rgba(56,101,138,.25);
+    --nav-bg:rgba(246,238,223,.86);
+    --shadow:0 8px 30px rgba(93,67,32,.16);
   }
   html{scroll-behavior:smooth}
   html,body{background:var(--night)}
@@ -73,7 +95,7 @@
   /* ---------- nav ---------- */
   .nav{
     position:sticky;top:0;z-index:50;
-    background:rgba(16,12,10,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    background:var(--nav-bg);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
     border-bottom:1px solid var(--line-soft);
   }
   .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-block:14px}
@@ -199,7 +221,7 @@
     padding:26px 26px 24px;display:flex;flex-direction:column;gap:12px;
     transition:border-color .3s, transform .3s, box-shadow .3s;
   }
-  .lex-card:hover{border-color:rgba(229,176,76,.4);transform:translateY(-3px);box-shadow:0 8px 30px rgba(0,0,0,0.3)}
+  .lex-card:hover{border-color:rgba(229,176,76,.4);transform:translateY(-3px);box-shadow:var(--shadow)}
   .lex-card.greek{border-color:var(--slate-dim)}
   .lex-card.greek:hover{border-color:rgba(143,180,206,.45)}
   .lex-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
@@ -263,7 +285,7 @@
     border:1px solid var(--line);background:var(--smoke);padding:30px 28px;
     display:flex;flex-direction:column;gap:14px;transition:border-color .3s, transform .3s, box-shadow .3s;
   }
-  .thread:hover{border-color:rgba(229,176,76,.4);transform:translateY(-3px);box-shadow:0 8px 30px rgba(0,0,0,0.3)}
+  .thread:hover{border-color:rgba(229,176,76,.4);transform:translateY(-3px);box-shadow:var(--shadow)}
   .thread .icon{width:40px;height:40px;color:var(--gold)}
   .thread h3{font-family:var(--serif);font-size:1.4rem;font-weight:700;line-height:1.25;margin:0;text-wrap:balance}
   .thread p{font-size:.96rem;color:var(--ash);line-height:1.7;margin:0}
@@ -298,7 +320,7 @@
     display:flex;flex-direction:column;gap:16px;
     transition:border-color .3s, transform .3s, box-shadow .3s;
   }
-  .voice:hover{border-color:rgba(229,176,76,.4);transform:translateY(-3px);box-shadow:0 8px 30px rgba(0,0,0,0.3)}
+  .voice:hover{border-color:rgba(229,176,76,.4);transform:translateY(-3px);box-shadow:var(--shadow)}
   .voice .icon{width:40px;height:40px;color:var(--gold)}
   .voice h3{font-family:var(--serif);font-size:1.5rem;font-weight:700;margin:0}
   .voice .vtag{font-family:var(--sans);font-size:.68rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
@@ -428,6 +450,127 @@
   .lr{font-family:var(--sans);font-size:.71rem;font-weight:600;letter-spacing:.04em;color:var(--ash);border:1px solid var(--line);padding:3px 8px;border-radius:3px;white-space:nowrap}
   .lex-card.greek .lr{border-color:var(--slate-dim)}
   .trisagion .center .qad{font-family:var(--sans);font-size:1rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-bright)}
+  .trisagion circle{stroke:var(--line)}
+
+  /* ---------- experience layer ---------- */
+  .progress{position:fixed;top:0;left:0;right:0;height:3px;z-index:70;pointer-events:none}
+  .progress b{display:block;height:100%;background:var(--fire);transform-origin:0 50%;transform:scaleX(0)}
+  .nav-right{display:flex;align-items:center;gap:clamp(14px,2.4vw,26px)}
+  .theme-toggle{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:34px;height:34px;border-radius:50%;flex-shrink:0;padding:0;
+    background:transparent;border:1px solid var(--line);color:var(--gold);cursor:pointer;
+    transition:border-color .3s,transform .3s;
+  }
+  .theme-toggle:hover{border-color:var(--gold);transform:rotate(18deg)}
+  .theme-toggle svg{width:16px;height:16px}
+  .theme-toggle .ic-moon{display:none}
+  [data-theme="light"] .theme-toggle .ic-sun{display:none}
+  [data-theme="light"] .theme-toggle .ic-moon{display:block}
+  .nav-links a.active{color:var(--gold-bright)}
+  .hero-glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(440px 320px at var(--mx,50%) var(--my,72%),rgba(229,176,76,.11),transparent 70%)}
+  .vref,.vref-inline{cursor:pointer}
+  .lr.vref{transition:border-color .25s,color .25s}
+  .lr.vref:hover,.lr.vref:focus-visible{border-color:var(--gold);color:var(--gold-bright)}
+  .vref-inline{border-bottom:1px dotted var(--gold);transition:color .2s}
+  .vref-inline:hover,.vref-inline:focus-visible{color:var(--gold-bright)}
+  .vpop{
+    position:absolute;z-index:90;max-width:min(370px,86vw);
+    background:var(--smoke2);border:1px solid var(--line);border-radius:6px;
+    padding:16px 18px 14px;box-shadow:var(--shadow);
+    opacity:0;transform:translateY(6px);transition:opacity .2s,transform .2s;pointer-events:none;
+  }
+  .vpop.show{opacity:1;transform:none;pointer-events:auto}
+  .vp-ref{font-family:var(--sans);font-size:.66rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:0 0 8px}
+  .vp-txt{font-size:.95rem;font-style:italic;line-height:1.6;color:var(--ivory);margin:0}
+  .vp-txt b{color:var(--gold-bright);font-weight:600}
+  .to-top{
+    position:fixed;right:22px;bottom:22px;z-index:70;width:42px;height:42px;border-radius:50%;padding:0;
+    border:1px solid var(--line);background:var(--smoke2);color:var(--gold);cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    opacity:0;transform:translateY(10px);pointer-events:none;transition:opacity .3s,transform .3s,border-color .3s;
+  }
+  .to-top.show{opacity:1;transform:none;pointer-events:auto}
+  .to-top:hover{border-color:var(--gold)}
+  .to-top svg{width:16px;height:16px}
+  .spectrum-stop{cursor:pointer}
+  .spectrum-stop:hover .sl{filter:brightness(1.25)}
+  .flash{animation:flashring 1.8s ease}
+  @keyframes flashring{0%,55%{box-shadow:0 0 0 2px var(--gold)}100%{box-shadow:0 0 0 2px transparent}}
+  .anchor-btn{
+    display:inline-flex;vertical-align:middle;margin-left:12px;width:26px;height:26px;border-radius:4px;
+    align-items:center;justify-content:center;border:none;background:transparent;
+    color:var(--faint);cursor:pointer;opacity:0;transition:opacity .25s,color .25s;
+  }
+  .title:hover .anchor-btn,.anchor-btn:focus-visible{opacity:1}
+  .anchor-btn:hover{color:var(--gold)}
+  .anchor-btn svg{width:14px;height:14px}
+  .toast{
+    position:fixed;left:50%;bottom:28px;transform:translate(-50%,16px);z-index:95;
+    font-family:var(--sans);font-size:.78rem;font-weight:600;letter-spacing:.06em;
+    background:var(--smoke2);border:1px solid var(--gold);color:var(--gold-bright);
+    padding:9px 18px;border-radius:99px;opacity:0;transition:opacity .3s,transform .3s;pointer-events:none;max-width:86vw;
+  }
+  .toast.show{opacity:1;transform:translate(-50%,0)}
+  .index-grid{columns:3;column-gap:18px;margin-top:56px}
+  @media (max-width:1000px){.index-grid{columns:2}}
+  @media (max-width:640px){.index-grid{columns:1}}
+  .ix-book{break-inside:avoid;border:1px solid var(--line);background:var(--smoke);padding:18px 20px 16px;margin-bottom:18px}
+  .ix-book h4{font-family:var(--serif);font-size:1.05rem;font-weight:700;margin:0 0 10px;color:var(--ivory)}
+  .ix-refs{display:flex;flex-wrap:wrap;gap:6px}
+
+  /* thread icon accents (theme-aware) */
+  .thread .icon.tc-gold{color:var(--gold)}
+  .thread .icon.tc-pale{color:#EFCB86}
+  .thread .icon.tc-slate{color:var(--slate)}
+  .thread .icon.tc-ember{color:var(--ember)}
+  .thread .icon.tc-orange{color:#D3612C}
+  .thread .icon.tc-cream{color:#FAF0DC}
+
+  /* ---------- light theme component overrides ---------- */
+  [data-theme="light"] .hero-heb{animation:none;text-shadow:0 2px 30px rgba(196,130,26,.35)}
+  [data-theme="light"] .hero-bg{background:
+    radial-gradient(ellipse 70% 52% at 50% 108%, rgba(196,90,30,.14), transparent 62%),
+    radial-gradient(ellipse 46% 34% at 50% 112%, rgba(180,130,40,.20), transparent 60%)}
+  [data-theme="light"] .hero-glow{background:radial-gradient(440px 320px at var(--mx,50%) var(--my,72%),rgba(143,98,16,.10),transparent 70%)}
+  [data-theme="light"] .embers{display:none}
+  [data-theme="light"] .spectrum-stop:nth-child(4) .sl{color:#9F7118}
+  [data-theme="light"] .spectrum-stop:nth-child(5) .sl{color:#8F6210}
+  [data-theme="light"] .spectrum-stop:nth-child(6) .sl{color:#77602F}
+  [data-theme="light"] .lex-card.yirah-card{border-left-color:#B98F2E}
+  [data-theme="light"] .lex-card.yirah-card .lex-icon{color:#B98F2E}
+  [data-theme="light"] .lex-card.yare-card{border-left-color:#A08A52}
+  [data-theme="light"] .lex-card.yare-card .lex-icon{color:#A08A52}
+  [data-theme="light"] .lex-card.eulabeia-card{border-left-color:#4E7FA6}
+  [data-theme="light"] .lex-card.eulabeia-card .lex-icon{color:#4E7FA6}
+  [data-theme="light"] .lex-card.sebomai-card{border-left-color:#3A7D8F}
+  [data-theme="light"] .lex-card.sebomai-card .lex-icon{color:#3A7D8F}
+  [data-theme="light"] .thread .icon.tc-pale{color:#B98F2E}
+  [data-theme="light"] .thread .icon.tc-orange{color:#B0511E}
+  [data-theme="light"] .thread .icon.tc-cream{color:#77602F}
+  [data-theme="light"] .chip-green{color:#2E7D4F !important;border-color:rgba(46,125,79,.35) !important;background:rgba(46,125,79,.07) !important}
+  [data-theme="light"] .chip-purple{color:#6A50B8 !important;border-color:rgba(106,80,184,.35) !important;background:rgba(106,80,184,.07) !important}
+  [data-theme="light"] .chip-teal{color:#3A7D8F !important;border-color:rgba(58,125,143,.35) !important;background:rgba(58,125,143,.07) !important}
+  [data-theme="light"] .voice.orthodox-voice{border-left-color:#6A50B8}
+  [data-theme="light"] .voice.orthodox-voice .icon{color:#6A50B8}
+  [data-theme="light"] .voice.modern-voice{border-left-color:#3A7D8F}
+  [data-theme="light"] .voice.modern-voice .icon{color:#3A7D8F}
+  [data-theme="light"] .arc::before{background:linear-gradient(180deg,#8E2A18,#B8431C 30%,#C4611F 55%,#9F7118 80%,#B98F2E)}
+  [data-theme="light"] .arc-pulse{box-shadow:0 0 14px 3px rgba(159,113,24,.45)}
+
+  /* ---------- print ---------- */
+  @media print{
+    html,body{background:#fff !important}
+    :root{--night:#fff;--smoke:#fff;--smoke2:#fff;--ivory:#1c1c1c;--ash:#444;--faint:#666;
+      --gold:#7a5510;--gold-bright:#6a4a0e;--slate:#33566f;
+      --line:#c9c2b4;--line-soft:#e2dccf;--shadow:none}
+    .nav,.scroll-cue,.embers,.progress,.to-top,.theme-toggle,.anchor-btn,.hero-glow{display:none !important}
+    .hero{min-height:auto;padding-block:40px}
+    .hero-heb{animation:none;text-shadow:none}
+    section{padding-block:44px}
+    .lex-card,.thread,.voice,.text-card,.ix-book,.arc-item{break-inside:avoid}
+    .js .rv{opacity:1 !important;transform:none !important}
+  }
 
   /* ---------- reveal ---------- */
   .js .rv{opacity:0;transform:translateY(26px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.65,.25,1)}
@@ -436,22 +579,29 @@
   @media (prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
     .hero-heb,.embers i,.scroll-cue::after,.paradox-root .letters,
-    .spectrum-band,.arc-pulse,.trisagion svg{animation:none}
-    .embers,.arc-pulse{display:none}
+    .spectrum-band,.arc-pulse,.trisagion svg,.flash{animation:none}
+    .embers,.arc-pulse,.hero-glow{display:none}
     .js .rv{opacity:1;transform:none;transition:none}
   }
 </style>
 
+<div class="progress" aria-hidden="true"><b></b></div>
 <nav class="nav">
   <div class="wrap nav-inner">
     <a href="#top" class="wordmark"><span class="heb">יִרְאָה</span><span class="lat">Yirah · a study</span></a>
-    <div class="nav-links">
-      <a href="#paradox">Paradox</a>
-      <a href="#lexicon">Lexicon</a>
-      <a href="#spectrum">Spectrum</a>
-      <a href="#threads">Threads</a>
-      <a href="#voices">Voices</a>
-      <a href="#arc">Arc</a>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="#paradox">Paradox</a>
+        <a href="#lexicon">Lexicon</a>
+        <a href="#spectrum">Spectrum</a>
+        <a href="#threads">Threads</a>
+        <a href="#voices">Voices</a>
+        <a href="#arc">Arc</a>
+      </div>
+      <button class="theme-toggle" id="themeToggle" aria-label="Switch between dark and light mode" aria-pressed="false">
+        <svg class="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.2 5.2l1.4 1.4M17.4 17.4l1.4 1.4M18.8 5.2l-1.4 1.4M6.6 17.4l-1.4 1.4"/></svg>
+        <svg class="ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4 8.5 8.5 0 1 0 20 14.5Z"/></svg>
+      </button>
     </div>
   </div>
 </nav>
@@ -459,6 +609,7 @@
 <!-- ================= HERO ================= -->
 <header class="hero" id="top">
   <div class="hero-bg"></div>
+  <div class="hero-glow" aria-hidden="true"></div>
   <div class="embers" aria-hidden="true">
     <i style="--x:8%;--s:4px;--d:12s;--dl:0s;--drift:34px"></i>
     <i style="--x:16%;--s:6px;--d:15s;--dl:3.2s;--drift:-26px"></i>
@@ -549,7 +700,8 @@
     <p class="lede rv">
       “Fear” in an English Bible is a funnel. Behind it, Hebrew distinguishes trembling from dread
       from reverence, and Greek distinguishes terror from careful devotion. Gold marks the Hebrew
-      Bible; slate marks the Greek New Testament.
+      Bible; slate marks the Greek New Testament. Hover or tap any verse reference on this page
+      to read the text itself.
     </p>
 
     <div class="lang-head hebrew rv"><h3>Hebrew — the Tanakh</h3><div class="rule-x"></div></div>
@@ -817,7 +969,7 @@
     <div class="threads-grid">
 
       <article class="thread rv">
-        <svg class="icon" style="color: #E5B04C;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <svg class="icon tc-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M2 12s3.8-6.5 10-6.5S22 12 22 12s-3.8 6.5-10 6.5S2 12 2 12Z"/><circle cx="12" cy="12" r="2.6"/>
         </svg>
         <h3>To fear is to see</h3>
@@ -831,7 +983,7 @@
       </article>
 
       <article class="thread rv">
-        <svg class="icon" style="color: #EFCB86;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <svg class="icon tc-pale" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M12 3c1.8 2.4 2.6 4 .9 6.1C15.5 8.6 16 7.5 16.3 6c1.5 2 2.2 4.3 1.2 6.7-1 2.5-3.1 3.8-5.5 3.8s-4.6-1.3-5.5-3.8C5.4 10.3 6.4 8 8 6.2c.2 1.3.7 2.3 2 3C8.4 6.9 10.2 5 12 3Z"/><path d="M8.5 20.5h7"/>
         </svg>
         <h3>The beginning that is never left behind</h3>
@@ -844,7 +996,7 @@
       </article>
 
       <article class="thread rv">
-        <svg class="icon" style="color: #8FB4CE;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <svg class="icon tc-slate" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M12 21s-7-4.4-9.2-9A5.2 5.2 0 0 1 12 7.6 5.2 5.2 0 0 1 21.2 12C19 16.6 12 21 12 21Z"/><path d="M12 7.6V4.5M9.5 5.5 12 3l2.5 2.5"/>
         </svg>
         <h3>Forgiveness creates fear</h3>
@@ -857,7 +1009,7 @@
       </article>
 
       <article class="thread rv">
-        <svg class="icon" style="color: #DF5B28;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <svg class="icon tc-ember" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M12 3 4.5 6v5.2c0 4.6 3.1 7.6 7.5 9.8 4.4-2.2 7.5-5.2 7.5-9.8V6L12 3Z"/><path d="M12 8.2v4.6"/><circle cx="12" cy="15.6" r=".4"/>
         </svg>
         <h3>One fear swallows every other</h3>
@@ -871,7 +1023,7 @@
       </article>
 
       <article class="thread rv">
-        <svg class="icon" style="color: #D3612C;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <svg class="icon tc-orange" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.6M12 18.9v2.6M2.5 12h2.6M18.9 12h2.6M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M18.7 5.3l-1.8 1.8M7.1 16.9l-1.8 1.8"/>
         </svg>
         <h3>Trembling and joy hold hands</h3>
@@ -885,7 +1037,7 @@
       </article>
 
       <article class="thread rv">
-        <svg class="icon" style="color: #FAF0DC;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <svg class="icon tc-cream" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M4 20h16"/><path d="M7 20V15"/><path d="M7 15c0-4.5 2-7.5 5-9.5"/><path d="M12 5.5c2 .8 3 2.3 3.2 4.2M12 5.5c-.5 1.8.2 3.3 1.8 4.4M12 11.5c1.5-.4 3.4.1 4.4 1.6"/>
         </svg>
         <h3>The fear that is promised, not demanded</h3>
@@ -1186,7 +1338,7 @@
           <path id="ringpath" d="M150,150 m-118,0 a118,118 0 1,1 236,0 a118,118 0 1,1 -236,0"/>
         </defs>
         <circle cx="150" cy="150" r="98" fill="none" stroke="rgba(229,176,76,.22)" stroke-width="1"/>
-        <text style="font-family:'Avenir Next','Helvetica Neue',sans-serif;font-size:15.5px;font-weight:600;letter-spacing:.34em;fill:#E5B04C">
+        <text style="font-family:'Avenir Next','Helvetica Neue',sans-serif;font-size:15.5px;font-weight:600;letter-spacing:.34em;fill:var(--gold)">
           <textPath href="#ringpath">HOLY · HOLY · HOLY · ΑΓΙΟΣ · ΑΓΙΟΣ · ΑΓΙΟΣ ·&#160;</textPath>
         </text>
       </svg>
@@ -1213,6 +1365,21 @@
   </div>
 </section>
 
+<!-- ================= SCRIPTURE INDEX ================= -->
+<section id="index">
+  <div class="wrap">
+    <p class="eyebrow rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12a1 1 0 0 1 1 1v17l-7-4-7 4V4a1 1 0 0 1 1-1Z"/></svg>Scripture Index</p>
+    <h2 class="title rv">Every text on this page.</h2>
+    <p class="lede rv">
+      An index of each passage cited in this study, in canonical order. Hover a reference to read
+      the verse; click it to jump to where it appears above.
+    </p>
+    <div class="index-grid rv" id="indexGrid"></div>
+  </div>
+</section>
+
+<button class="to-top" aria-label="Back to top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5.5 11.5 12 5l6.5 6.5"/></svg></button>
+
 <footer>
   <div class="wrap foot-grid">
     <div>
@@ -1232,21 +1399,317 @@
       <h4>Colophon</h4>
       <p>Set in darkness by design — “the people stood far off, but Moses drew near to the thick
       darkness where God was” (Exod 20:21). The palette follows the study’s spine: one band of
-      flame, from garnet terror to golden delight.</p>
+      flame, from garnet terror to golden delight. Prefer daylight? The lamp in the corner of the
+      navigation turns the page to parchment.</p>
     </div>
   </div>
 </footer>
 
 <script>
-  (function(){
-    var root=document.documentElement;
-    if(!('IntersectionObserver' in window))return;
+(function(){
+  'use strict';
+  var root=document.documentElement;
+  var reduced=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- theme ---------- */
+  var toggle=document.getElementById('themeToggle');
+  function applyTheme(t,save){
+    if(t==='light'){root.setAttribute('data-theme','light');}else{root.removeAttribute('data-theme');}
+    if(toggle)toggle.setAttribute('aria-pressed',String(t==='light'));
+    if(save){try{localStorage.setItem('fog-theme',t);}catch(e){}}
+  }
+  applyTheme(root.getAttribute('data-theme')==='light'?'light':'dark',false);
+  if(toggle)toggle.addEventListener('click',function(){
+    applyTheme(root.getAttribute('data-theme')==='light'?'dark':'light',true);
+  });
+
+  /* ---------- reveal + scrollspy ---------- */
+  if('IntersectionObserver' in window){
     root.classList.add('js');
-    var io=new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}
-      });
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
     },{threshold:0.12,rootMargin:'0px 0px -6% 0px'});
     document.querySelectorAll('.rv').forEach(function(el){io.observe(el);});
-  })();
+    var navMap={};
+    document.querySelectorAll('.nav-links a[href^="#"]').forEach(function(a){navMap[a.getAttribute('href').slice(1)]=a;});
+    var spy=new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        var a=navMap[e.target.id];if(!a||!e.isIntersecting)return;
+        Object.keys(navMap).forEach(function(k){navMap[k].classList.remove('active');});
+        a.classList.add('active');
+      });
+    },{rootMargin:'-25% 0px -65% 0px'});
+    Object.keys(navMap).forEach(function(id){var s=document.getElementById(id);if(s)spy.observe(s);});
+  }
+
+  /* ---------- progress bar, back-to-top, hero parallax ---------- */
+  var bar=document.querySelector('.progress b'),toTop=document.querySelector('.to-top'),
+      heroInner=document.querySelector('.hero-inner'),tick=false;
+  function onScroll(){
+    if(tick)return;tick=true;
+    requestAnimationFrame(function(){
+      var max=root.scrollHeight-root.clientHeight,y=window.scrollY||root.scrollTop;
+      if(bar)bar.style.transform='scaleX('+(max>0?y/max:0)+')';
+      if(toTop)toTop.classList.toggle('show',y>700);
+      if(heroInner&&!reduced){
+        if(y<900){heroInner.style.transform='translateY('+(y*0.14)+'px)';heroInner.style.opacity=Math.max(0,1-y/750);}
+      }
+      hidePop();
+      tick=false;
+    });
+  }
+  addEventListener('scroll',onScroll,{passive:true});onScroll();
+  if(toTop)toTop.addEventListener('click',function(){scrollTo({top:0,behavior:reduced?'auto':'smooth'});});
+
+  /* ---------- hero pointer glow ---------- */
+  var hero=document.querySelector('.hero'),glow=document.querySelector('.hero-glow');
+  if(hero&&glow&&!reduced&&matchMedia('(pointer:fine)').matches){
+    hero.addEventListener('pointermove',function(ev){
+      var r=hero.getBoundingClientRect();
+      glow.style.setProperty('--mx',((ev.clientX-r.left)/r.width*100).toFixed(1)+'%');
+      glow.style.setProperty('--my',((ev.clientY-r.top)/r.height*100).toFixed(1)+'%');
+    });
+  }
+
+  /* ---------- verse database (adapted renderings; fear-words emphasized) ---------- */
+  var DB={
+    "gen 3:10":"I heard the sound of you in the garden, and <b>I was afraid</b>, because I was naked, and I hid myself.",
+    "gen 15:12":"As the sun was going down, a deep sleep fell on Abram. And behold, <b>dread</b> (ʾemah) and great darkness fell upon him.",
+    "gen 22:8-14":"Abraham said, “God will <b>see to</b> (yirʾeh) the lamb”… “Now I know that you <b>fear</b> (yereʾ) God”… So Abraham called the name of that place “The LORD will <b>see</b>” (YHWH yirʾeh).",
+    "gen 22:12":"Do not lay your hand on the boy… for now I know that you <b>fear God</b>, seeing you have not withheld your son, your only son, from me.",
+    "gen 27:33":"Then Isaac <b>trembled</b> with an exceedingly great trembling (ḥaradah gedolah)…",
+    "gen 28:17":"And he <b>was afraid</b>, and said, “How <b>awesome</b> (noraʾ) is this place! This is none other than the house of God, and this is the gate of heaven.”",
+    "gen 31:42":"If the God of my father, the God of Abraham and <b>the Fear of Isaac</b> (Paḥad Yiṣḥaq), had not been on my side…",
+    "exod 1:17":"But the midwives <b>feared God</b> and did not do as the king of Egypt commanded them, but let the male children live.",
+    "exod 15:16":"<b>Terror</b> (ʾemah) and dread fall upon them; by the greatness of your arm they are still as a stone.",
+    "exod 19:18":"Mount Sinai was wrapped in smoke because the LORD had descended on it in fire… and the whole mountain <b>trembled</b> (wayeḥerad) greatly.",
+    "exod 20:20":"<b>Do not fear</b>, for God has come to test you, that <b>the fear of him</b> may be before you, so that you do not sin.",
+    "exod 20:21":"The people stood far off, while Moses drew near to the thick darkness (ʿaraphel) where God was.",
+    "exod 23:27":"I will send <b>my terror</b> (ʾemati) before you, and will throw into confusion all the people against whom you shall come.",
+    "deut 4:24":"For the LORD your God is a consuming fire, a jealous God.",
+    "deut 10:12":"What does the LORD your God require of you, but <b>to fear</b> the LORD your God, to walk in all his ways, <b>to love him</b>, and to serve him with all your heart and with all your soul.",
+    "josh 2:9":"I know that the LORD has given you the land, and that <b>the terror of you</b> (ʾematkem) has fallen upon us.",
+    "1sam 14:15":"There was a panic in the camp… the earth quaked, and it became <b>a trembling of God</b> (ḥerdat ʾElohim).",
+    "1kgs 8:39-40":"Forgive, and act… <b>that they may fear you</b> all the days that they live in the land.",
+    "2chr 19:9":"Thus you shall do <b>in the fear of the LORD</b>, in faithfulness, and with your whole heart.",
+    "ezra 9:4":"Then all who <b>trembled</b> (ḥared) at the words of the God of Israel gathered around me.",
+    "neh 8:10-12":"Do not be grieved, for the joy of the LORD is your strength… And all the people went their way… to make great rejoicing.",
+    "job 4:14":"<b>Dread</b> (paḥad) came upon me, and trembling, which made all my bones shake.",
+    "job 28:28":"Behold, <b>the fear of the Lord</b>, that is wisdom, and to turn away from evil is understanding.",
+    "ps 2:11":"Serve the LORD <b>with fear</b> (beyirʾah), and rejoice <b>with trembling</b> (birʿadah).",
+    "ps 19:9":"<b>The fear of the LORD</b> is clean (ṭehorah), enduring forever.",
+    "ps 25:14":"The secret counsel (sod) of the LORD is for <b>those who fear him</b>, and he makes known to them his covenant.",
+    "ps 27:1":"The LORD is my light and my salvation; <b>whom shall I fear</b>? The LORD is the stronghold of my life; of whom shall I be afraid?",
+    "ps 34:11":"Come, O children, listen to me; <b>the fear of the LORD</b> I will teach you.",
+    "ps 86:11":"Teach me your way, O LORD, that I may walk in your truth; unite my heart <b>to fear your name</b>.",
+    "ps 111:10":"<b>The fear of the LORD</b> is the beginning of wisdom; all those who practice it have a good understanding.",
+    "ps 115:11":"You who <b>fear the LORD</b>, trust in the LORD! He is their help and their shield.",
+    "ps 130:4":"But with you there is forgiveness, <b>that you may be feared</b> (lemaʿan tiwwareʾ).",
+    "ps 147:11":"The LORD takes pleasure in <b>those who fear him</b>, in those who hope in his steadfast love.",
+    "prov 1:7":"<b>The fear of the LORD</b> is the beginning (reshit) of knowledge; fools despise wisdom and instruction.",
+    "prov 8:13":"<b>The fear of the LORD</b> is hatred of evil.",
+    "prov 9:10":"<b>The fear of the LORD</b> is the beginning of wisdom, and the knowledge of the Holy One is insight.",
+    "prov 14:26":"In <b>the fear of the LORD</b> one has strong confidence… <b>The fear of the LORD</b> is a fountain of life.",
+    "prov 28:14":"Blessed is the one who <b>fears</b> (mefaḥed) always, but whoever hardens his heart will fall into calamity.",
+    "eccl 12:13":"The end of the matter; all has been heard. <b>Fear God</b> and keep his commandments, for this is the whole of man.",
+    "isa 2:10":"Enter into the rock and hide in the dust from before <b>the terror of the LORD</b> (paḥad YHWH), and from the splendor of his majesty.",
+    "isa 6:1-8":"I saw the Lord sitting upon a throne, high and lifted up… And I said: “Woe is me! For I am lost… for my eyes have seen the King, the LORD of hosts.”",
+    "isa 6:3":"And one called to another and said: “Holy, holy, holy is the LORD of hosts; the whole earth is full of his glory!”",
+    "isa 8:12-13":"<b>Do not fear</b> what they fear… But the LORD of hosts, him you shall honor as holy. Let him be <b>your fear</b>, and let him be <b>your dread</b>.",
+    "isa 11:2-3":"The Spirit of the LORD shall rest upon him… the Spirit of knowledge and of <b>the fear of the LORD</b>. And his delight shall be in <b>the fear of the LORD</b>.",
+    "isa 29:13":"This people draw near with their mouth… while their hearts are far from me, and <b>their fear of me</b> is a commandment taught by men.",
+    "isa 33:6":"He will be the stability of your times… <b>the fear of the LORD</b> is Zion’s treasure (ʾotsar).",
+    "isa 66:2":"This is the one to whom I will look: he who is humble and contrite in spirit and <b>trembles</b> (ḥared) at my word.",
+    "jer 32:40":"I will make with them an everlasting covenant… And I will put <b>the fear of me</b> in their hearts, that they may not turn from me.",
+    "hos 3:5":"They shall come <b>in dread</b> (paḥad) to the LORD and to his goodness in the latter days.",
+    "mal 3:16":"Then those who <b>feared the LORD</b> spoke with one another. The LORD paid attention and heard them, and a book of remembrance was written before him.",
+    "matt 10:28-31":"<b>Do not fear</b> those who kill the body but cannot kill the soul. Rather <b>fear him</b> who can destroy both soul and body in hell… <b>Fear not</b>, therefore; you are of more value than many sparrows.",
+    "matt 28:8":"They departed quickly from the tomb <b>with fear and great joy</b> (meta phobou kai charas megalēs), and ran to tell his disciples.",
+    "luke 2:25":"Simeon… was righteous and <b>devout</b> (eulabēs), waiting for the consolation of Israel, and the Holy Spirit was upon him.",
+    "luke 5:8":"Simon Peter fell down at Jesus’ knees, saying, “Depart from me, for I am a sinful man, O Lord.”",
+    "luke 12:5":"<b>Fear him</b> who, after he has killed, has authority to cast into hell. Yes, I tell you, <b>fear him</b>!",
+    "john 9:31":"If anyone is <b>a worshiper of God</b> (theosebēs) and does his will, God listens to him.",
+    "acts 2:5":"Now there were dwelling in Jerusalem Jews, <b>devout men</b> (eulabeis) from every nation under heaven.",
+    "acts 9:31":"So the church… had peace and was being built up. And walking in <b>the fear of the Lord</b> and in the comfort of the Holy Spirit, it multiplied.",
+    "acts 10:2":"Cornelius… a <b>devout man who feared God</b> (phoboumenos ton theon) with all his household, gave alms generously and prayed continually to God.",
+    "acts 13:16":"Paul stood up, and motioning with his hand said: “Men of Israel and <b>you who fear God</b>, listen.”",
+    "acts 13:43":"Many Jews and <b>devout converts</b> (sebomenoi) to Judaism followed Paul and Barnabas.",
+    "acts 16:14":"Lydia… a <b>worshiper of God</b> (sebomenē ton theon). The Lord opened her heart to pay attention to what was said by Paul.",
+    "acts 17:4":"Some of them were persuaded and joined Paul and Silas, as did a great many of the <b>devout</b> (sebomenoi) Greeks.",
+    "acts 18:7":"Titius Justus, a <b>worshiper of God</b> (sebomenos ton theon), whose house was next door to the synagogue.",
+    "rom 2:4":"Do you presume on the riches of his kindness…? God’s kindness is meant to lead you to repentance.",
+    "2cor 7:1":"Let us cleanse ourselves from every defilement of body and spirit, bringing holiness to completion <b>in the fear of God</b>.",
+    "phil 2:12":"Work out your own salvation <b>with fear and trembling</b> (meta phobou kai tromou), for it is God who works in you, both to will and to work for his good pleasure.",
+    "1pet 1:17":"If you call on him as Father… conduct yourselves <b>with fear</b> throughout the time of your exile — you were ransomed with the precious blood of Christ.",
+    "heb 5:7":"Jesus offered up prayers… with loud cries and tears… and he was heard because of his <b>reverence</b> (eulabeia).",
+    "heb 11:7":"By faith Noah, being warned by God concerning events as yet unseen, <b>in reverent fear</b> (eulabētheis) constructed an ark.",
+    "heb 12:28":"Let us offer to God acceptable worship, with <b>reverence and awe</b> (meta eulabeias kai deous), for our God is a consuming fire.",
+    "1john 4:18":"There is no fear in love, but perfect love casts out <b>fear</b>. For fear has to do with punishment (kolasis).",
+    "rev 1:17":"When I saw him, I fell at his feet as though dead. But he laid his right hand on me, saying, “<b>Fear not</b>, I am the first and the last.”",
+    "rev 14:7":"<b>Fear God</b> and give him glory, because the hour of his judgment has come; and worship him who made heaven and earth.",
+    "rev 15:4":"<b>Who will not fear you</b>, O Lord, and glorify your name? For you alone are holy."
+  };
+  var ALIAS={
+    "gen 22":"gen 22:12","gen 31:42,53":"gen 31:42","deut 10:12-13":"deut 10:12",
+    "prov 14:26-27":"prov 14:26","eccl 12:13-14":"eccl 12:13",
+    "isa 6:5":"isa 6:1-8","isa 11":"isa 11:2-3","isa 11:1-3":"isa 11:2-3","isa 11:3":"isa 11:2-3",
+    "isa 66:2,5":"isa 66:2","jer 32":"jer 32:40","jer 32:39-40":"jer 32:40",
+    "matt 10:28":"matt 10:28-31","acts 10":"acts 10:2","acts 13:16,26":"acts 13:16",
+    "phil 2:12-13":"phil 2:12","1pet 1:17-19":"1pet 1:17",
+    "heb 12:28-29":"heb 12:28","heb 12:29":"heb 12:28"
+  };
+  var BOOKS={gen:"gen",genesis:"gen",exod:"exod",exodus:"exod",deut:"deut",deuteronomy:"deut",
+    josh:"josh",joshua:"josh","1sam":"1sam","1samuel":"1sam","1kgs":"1kgs","1kings":"1kgs",
+    "2chr":"2chr","2chronicles":"2chr",ezra:"ezra",neh:"neh",nehemiah:"neh",job:"job",
+    ps:"ps",psalm:"ps",psalms:"ps",prov:"prov",proverbs:"prov",eccl:"eccl",ecclesiastes:"eccl",
+    isa:"isa",isaiah:"isa",jer:"jer",jeremiah:"jer",hos:"hos",hosea:"hos",mal:"mal",malachi:"mal",
+    matt:"matt",matthew:"matt",luke:"luke",john:"john",acts:"acts",rom:"rom",romans:"rom",
+    "2cor":"2cor","2corinthians":"2cor",phil:"phil",philippians:"phil","1pet":"1pet","1peter":"1pet",
+    heb:"heb",hebrews:"heb","1john":"1john",rev:"rev",revelation:"rev"};
+  var ORDER=["gen","exod","deut","josh","1sam","1kgs","2chr","ezra","neh","job","ps","prov","eccl","isa","jer","hos","mal","matt","luke","john","acts","rom","2cor","phil","1pet","heb","1john","rev"];
+  var NAMES={gen:"Genesis",exod:"Exodus",deut:"Deuteronomy",josh:"Joshua","1sam":"1 Samuel","1kgs":"1 Kings","2chr":"2 Chronicles",ezra:"Ezra",neh:"Nehemiah",job:"Job",ps:"Psalms",prov:"Proverbs",eccl:"Ecclesiastes",isa:"Isaiah",jer:"Jeremiah",hos:"Hosea",mal:"Malachi",matt:"Matthew",luke:"Luke",john:"John",acts:"Acts",rom:"Romans","2cor":"2 Corinthians",phil:"Philippians","1pet":"1 Peter",heb:"Hebrews","1john":"1 John",rev:"Revelation"};
+
+  function bookKey(b){return BOOKS[b.toLowerCase().replace(/[\s.]/g,"")]||null;}
+  function normRest(r){return r.replace(/[–—]/g,"-").replace(/\s+/g,"");}
+  function lookup(bk,rest){var k=bk+" "+normRest(rest);if(ALIAS[k])k=ALIAS[k];return DB[k]?k:null;}
+  function fullLabel(key){var i=key.indexOf(" ");return NAMES[key.slice(0,i)]+" "+key.slice(i+1).replace(/-/g,"–").replace(/,/g,", ");}
+  var found={};
+
+  var BOOK_RE=/\b((?:1 Samuel|1 Kings|2 Chronicles|2 Corinthians|1 Peter|1 John|1 Sam|1 Kgs|2 Chr|2 Cor|1 Pet|Genesis|Gen|Exodus|Exod|Deuteronomy|Deut|Joshua|Josh|Ezra|Nehemiah|Neh|Job|Psalms|Psalm|Ps|Proverbs|Prov|Ecclesiastes|Eccl|Isaiah|Isa|Jeremiah|Jer|Hosea|Hos|Malachi|Mal|Matthew|Matt|Luke|John|Acts|Romans|Rom|Philippians|Phil|Hebrews|Heb|Revelation|Rev)\.?)\s(\d+(?::\d+(?:\s?[–—-]\s?\d+)?(?:,\s?\d+(?:[–—-]\d+)?)*)?)/g;
+
+  function wrapRefs(container){
+    var walker=document.createTreeWalker(container,NodeFilter.SHOW_TEXT,null),nodes=[],n;
+    while((n=walker.nextNode())){
+      if(!n.parentElement.closest(".vref,.vref-inline,.lr,a,script,style,.vpop"))nodes.push(n);
+    }
+    nodes.forEach(function(node){
+      var txt=node.nodeValue,m,last=0,frag=null;
+      BOOK_RE.lastIndex=0;
+      while((m=BOOK_RE.exec(txt))){
+        var bk=bookKey(m[1]);if(!bk)continue;
+        var key=lookup(bk,m[2]);if(!key)continue;
+        if(!frag)frag=document.createDocumentFragment();
+        frag.appendChild(document.createTextNode(txt.slice(last,m.index)));
+        var sp=document.createElement("span");
+        sp.className="vref-inline";sp.textContent=m[0];
+        sp.setAttribute("data-k",key);sp.setAttribute("tabindex","0");
+        frag.appendChild(sp);
+        if(!found[key])found[key]={el:sp};
+        last=m.index+m[0].length;
+      }
+      if(frag){frag.appendChild(document.createTextNode(txt.slice(last)));node.parentNode.replaceChild(frag,node);}
+    });
+  }
+  [".paradox-cell p",".body-copy p",".lex-range",".lex-verse .ref",".spectrum-stop .sd",
+   ".thread p",".thread .refs",".text-card .ref",".voice li",".arc-item p",".arc-item .stage",
+   ".keystone .ref",".coda-close p",".coda .ref",".trisagion .sub","footer p"
+  ].forEach(function(sel){document.querySelectorAll(sel).forEach(wrapRefs);});
+
+  document.querySelectorAll(".lr").forEach(function(chip){
+    var t=chip.textContent.split("—")[0].split("(")[0].trim();
+    var m=t.match(/^((?:[123]\s)?[A-Za-z]+)\s+(\d.*)$/);if(!m)return;
+    var bk=bookKey(m[1]);if(!bk)return;
+    var key=lookup(bk,m[2]);if(!key)return;
+    chip.classList.add("vref");chip.setAttribute("data-k",key);chip.setAttribute("tabindex","0");
+    if(!found[key])found[key]={el:chip};
+  });
+
+  /* ---------- verse popover ---------- */
+  var pop=document.createElement("div");pop.className="vpop";pop.setAttribute("role","tooltip");
+  pop.innerHTML='<p class="vp-ref"></p><p class="vp-txt"></p>';
+  document.body.appendChild(pop);
+  var popRef=pop.querySelector(".vp-ref"),popTxt=pop.querySelector(".vp-txt"),popFor=null,hideT=null;
+  function showPop(el){
+    if(popFor===el)return;
+    var key=el.getAttribute("data-k"),e=DB[key];if(!e)return;
+    clearTimeout(hideT);popFor=el;
+    popRef.textContent=fullLabel(key);popTxt.innerHTML=e;
+    pop.style.left="0px";pop.style.top="-9999px";pop.classList.add("show");
+    var r=el.getBoundingClientRect(),pw=pop.offsetWidth,ph=pop.offsetHeight;
+    var x=Math.min(Math.max(12,r.left+r.width/2-pw/2),innerWidth-pw-12);
+    var above=r.top>ph+22;
+    var y=(above?r.top-ph-10:r.bottom+10)+(window.scrollY||root.scrollTop);
+    pop.style.left=(x+(window.scrollX||0))+"px";pop.style.top=y+"px";
+  }
+  function hidePop(){if(!popFor)return;popFor=null;pop.classList.remove("show");}
+  function scheduleHide(){clearTimeout(hideT);hideT=setTimeout(hidePop,180);}
+  pop.addEventListener("mouseenter",function(){clearTimeout(hideT);});
+  pop.addEventListener("mouseleave",scheduleHide);
+  document.addEventListener("mouseover",function(e){
+    var t=e.target.closest("[data-k]");
+    if(t)showPop(t);else if(!e.target.closest(".vpop"))scheduleHide();
+  });
+  document.addEventListener("focusin",function(e){
+    var t=e.target.closest("[data-k]");
+    if(t)showPop(t);else if(!e.target.closest(".vpop"))hidePop();
+  });
+  document.addEventListener("click",function(e){
+    if(e.target.closest(".ix-refs"))return;
+    var t=e.target.closest("[data-k]");
+    if(t)showPop(t);else if(!e.target.closest(".vpop"))hidePop();
+  });
+  document.addEventListener("keydown",function(e){if(e.key==="Escape")hidePop();});
+
+  /* ---------- flash helper + spectrum jumps ---------- */
+  function jumpTo(target){
+    if(!target)return;
+    hidePop();
+    target.scrollIntoView({behavior:reduced?"auto":"smooth",block:"center"});
+    var card=target.closest(".lex-card,.thread,.text-card,.voice,.arc-item,.paradox-cell,.keystone")||target;
+    card.classList.remove("flash");void card.offsetWidth;card.classList.add("flash");
+  }
+  var stopTargets=[".pachad-card",".emah-card",".charad-card",".yare-card",".yirah-card",null];
+  document.querySelectorAll(".spectrum-stop").forEach(function(stop,i){
+    var target=stopTargets[i]?document.querySelector(stopTargets[i]):document.querySelectorAll(".thread")[5];
+    if(!target)return;
+    stop.setAttribute("title","Jump to the word study");
+    stop.addEventListener("click",function(){jumpTo(target);});
+  });
+
+  /* ---------- scripture index ---------- */
+  var grid=document.getElementById("indexGrid");
+  if(grid){
+    var byBook={};
+    Object.keys(found).forEach(function(k){var b=k.split(" ")[0];(byBook[b]=byBook[b]||[]).push(k);});
+    ORDER.forEach(function(b){
+      if(!byBook[b])return;
+      byBook[b].sort(function(a,c){
+        function nums(k){var r=k.split(" ")[1].split(":");return [parseInt(r[0],10)||0,parseInt(r[1],10)||0];}
+        var na=nums(a),nc=nums(c);return na[0]-nc[0]||na[1]-nc[1];
+      });
+      var box=document.createElement("div");box.className="ix-book";
+      var h=document.createElement("h4");h.textContent=NAMES[b];box.appendChild(h);
+      var wrap=document.createElement("div");wrap.className="ix-refs";
+      byBook[b].forEach(function(k){
+        var s=document.createElement("span");
+        s.className="lr vref";s.setAttribute("data-k",k);s.setAttribute("tabindex","0");
+        s.textContent=k.split(" ")[1].replace(/-/g,"–").replace(/,/g,", ");
+        s.addEventListener("click",function(){jumpTo(found[k].el);});
+        wrap.appendChild(s);
+      });
+      box.appendChild(wrap);grid.appendChild(box);
+    });
+  }
+
+  /* ---------- section link anchors + toast ---------- */
+  var toastEl=document.createElement("div");toastEl.className="toast";document.body.appendChild(toastEl);
+  var toastT;
+  function toast(msg){
+    toastEl.textContent=msg;toastEl.classList.add("show");
+    clearTimeout(toastT);toastT=setTimeout(function(){toastEl.classList.remove("show");},1800);
+  }
+  document.querySelectorAll("section[id]").forEach(function(sec){
+    var t=sec.querySelector(".title");if(!t)return;
+    var b=document.createElement("button");
+    b.className="anchor-btn";b.setAttribute("aria-label","Copy link to this section");
+    b.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>';
+    b.addEventListener("click",function(){
+      var url=location.origin+location.pathname+"#"+sec.id;
+      if(navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(url).then(function(){toast("Link copied");},function(){toast(url);});
+      }else{toast(url);}
+    });
+    t.appendChild(b);
+  });
+})();
 </script>
