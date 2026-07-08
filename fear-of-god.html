@@ -1512,7 +1512,6 @@
   </div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
 <script>
 (function(){
   'use strict';
@@ -1559,16 +1558,44 @@
   }
 
   /* ---------- progress bar, back-to-top, hero parallax ---------- */
-  // Initialize Lenis smooth scroll
-  var lenis;
-  if (!reduced && typeof Lenis !== 'undefined') {
-    document.documentElement.style.scrollBehavior = 'auto';
-    lenis = new Lenis();
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
+  // Vanilla smooth scrolling for mouse wheel
+  if (!reduced) {
+    var targetY = window.scrollY || document.documentElement.scrollTop;
+    var currentY = targetY;
+    var isScrolling = false;
+
+    window.addEventListener('scroll', function() {
+      if (!isScrolling) {
+        currentY = targetY = window.scrollY || document.documentElement.scrollTop;
+      }
+    }, { passive: true });
+
+    window.addEventListener('wheel', function(e) {
+      if (Math.abs(e.deltaY) < 40 && e.deltaMode === 0) {
+        return;
+      }
+      e.preventDefault();
+      targetY += e.deltaY;
+      targetY = Math.max(0, Math.min(targetY, root.scrollHeight - root.clientHeight));
+      if (!isScrolling) {
+        isScrolling = true;
+        smoothScrollLoop();
+      }
+    }, { passive: false });
+
+    function smoothScrollLoop() {
+      if (!isScrolling) return;
+      var diff = targetY - currentY;
+      if (Math.abs(diff) < 0.5) {
+        currentY = targetY;
+        scrollTo(0, currentY);
+        isScrolling = false;
+      } else {
+        currentY += diff * 0.085;
+        scrollTo(0, currentY);
+        requestAnimationFrame(smoothScrollLoop);
+      }
     }
-    requestAnimationFrame(raf);
   }
 
   var bar=document.querySelector('.progress b'),toTop=document.querySelector('.to-top'),
@@ -1616,8 +1643,7 @@
   }
   addEventListener('scroll',onScroll,{passive:true});onScroll();
   if(toTop)toTop.addEventListener('click',function(){
-    if(typeof lenis!=='undefined'&&lenis)lenis.scrollTo(0);
-    else scrollTo({top:0,behavior:reduced?'auto':'smooth'});
+    scrollTo({top:0,behavior:reduced?'auto':'smooth'});
   });
 
   /* ---------- hero pointer glow ---------- */
@@ -1814,8 +1840,7 @@
   function jumpTo(target){
     if(!target)return;
     hidePop();
-    if(typeof lenis!=='undefined'&&lenis)lenis.scrollTo(target,{offset:-50});
-    else target.scrollIntoView({behavior:reduced?"auto":"smooth",block:"center"});
+    target.scrollIntoView({behavior:reduced?"auto":"smooth",block:"center"});
     var card=target.closest(".lex-card,.thread,.text-card,.voice,.arc-item,.paradox-cell,.keystone")||target;
     card.classList.remove("flash");void card.offsetWidth;card.classList.add("flash");
   }
